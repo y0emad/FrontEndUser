@@ -1,22 +1,22 @@
 @font-face {
   font-family: "GEOneLight";
-  src: url("/public/GE_SS_TEXT_LIGHT.otf") format("opentype");
+  src: url("/GE_SS_TEXT_LIGHT.otf") format("opentype");
 }
 @font-face {
   font-family: "GETwoLight";
-  src: url("/public/ArbFONTS-GE-SS-Two-Light_28.otf") format("opentype");
+  src: url("/ArbFONTS-GE-SS-Two-Light_28.otf") format("opentype");
 }
 @font-face {
   font-family: "GEThreeLight";
-  src: url("/public/ArbFONTS-GE-SS-Three-Light_19.otf") format("opentype");
+  src: url("/ArbFONTS-GE-SS-Three-Light_19.otf") format("opentype");
 }
 @font-face {
   font-family: "GEBold";
-  src: url("/public/GE-SS-Text-Bold_26.otf") format("opentype"); /* Use "opentype" format for .otf files */
+  src: url("/GE-SS-Text-Bold_26.otf") format("opentype");
 }
 @font-face {
   font-family: "GEMed";
-  src: url("/public/GE-SS-Text-Medium.otf") format("opentype"); /* Use "opentype" format for .otf files */
+  src: url("/GE-SS-Text-Medium.otf") format("opentype");
 }
 
 .fontOneLight {

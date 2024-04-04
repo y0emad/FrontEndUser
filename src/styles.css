@@ -36,3 +36,23 @@
 .fontBold {
   font-family: "GEBold";
 }
+
+.ant-select-selector {
+  background-color: transparent !important;
+  color: #e5e7eb !important;
+}
+.ant-select-selector:hover {
+  border-color: #7f6727 !important;
+}
+
+.ant-select-focused .ant-select-selector {
+  border-color: #7f6727 !important;
+  color: #e5e7eb !important;
+  box-shadow: none !important;
+}
+.ant-select-selection-item {
+  color: #e5e7eb !important;
+}
+body {
+  height: 150vh;
+}

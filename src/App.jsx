@@ -1,9 +1,8 @@
-import { NavBarMain } from "./components/NavBarMain";
-
+import { FooterMain } from "./components/FooterMain";
 function App() {
   return (
     <>
-      <NavBarMain />
+      <FooterMain />
     </>
   );
 }

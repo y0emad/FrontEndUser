@@ -3,7 +3,14 @@
     "Books": "Books",
     "Brochures": "Brochures",
     "Services": "Services",
-    "My projects": "My projects",
-    "Sign_in": "Sign in"
+    "My_projects": "My projects",
+    "Log_in": "Log in"
+  },
+  "footer": {
+    "copyright": "all rights reserved © the electronic portal of the scientific calculation Center 2024"
+  },
+  "error": {
+    "error404": "Page Not Found",
+    "Go_Home": "Go Home"
   }
 }

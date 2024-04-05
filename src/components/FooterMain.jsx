@@ -10,8 +10,16 @@ import {
   FacebookFilled,
   InstagramFilled,
 } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
+import useLocalStorage from "../hooks/useLocalStorage";
+import { useEffect } from "react";
 
 export function FooterMain() {
+  const [t, i18n] = useTranslation("global");
+  const [lang, setLang] = useLocalStorage("lang", "ar");
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [lang]);
   return (
     <Footer className="p-3   w-full bg-[#000915] text-gray-200   h-[162px] grid grid-rows-3  justify-center items-center space-y-3">
       <div className="sm:h-16 sm:w-16 h-14 w-14 px-1 py-1 justify-self-center  ">
@@ -45,7 +53,7 @@ export function FooterMain() {
         </div>
       </div>
       <div className="text-gray-200 text-center fontTwoLight h-fit">
-        2024 جميع الحقوق محفوظة © البوابة الإلكترونية بمركز الحساب العلمي
+        {t("footer.copyright")}
       </div>
       <div className="text-gray-200   w-fit h-fit   text-lg flex sm:top-auto gap-3 items-center    sm:absolute sm:right-7 justify-self-center">
         <a href="http://www.facebook.com">

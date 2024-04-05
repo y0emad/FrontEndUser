@@ -3,6 +3,7 @@ import "../styles.css";
 import logo from "../images/logo.png";
 import { Dropdown, Select } from "antd";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { Link } from "react-router-dom";
 import {
   GlobalOutlined,
   LoginOutlined,
@@ -34,7 +35,6 @@ export function NavBarMain() {
     lang === "ar"
       ? document.documentElement.setAttribute("dir", "ltr")
       : document.documentElement.setAttribute("dir", "rtl");
-    console.log("Direction:", htmlDir);
   }, [lang]);
   const handleChangeLang = (value) => {
     setLang(() => value);
@@ -46,19 +46,19 @@ export function NavBarMain() {
     navlinks?.classList.toggle("top-[100%]");
   };
   return (
-    <div
+    <nav
       className={
         "grid grid-cols-3 h-16 bg-[#000915] z-50 items-center mx-auto fixed top-0 w-full"
       }
     >
-      <div className=" grid grid-cols-2 h-33 m-3 text-gray-200 me-auto gap-5  items-center justify-center">
-        <a
-          href="#"
-          className="md:flex  gap-2 justify-center text-nowrap  items-center fontMed hidden"
+      <div className=" grid grid-cols-2 h-33 m-3  text-gray-200 me-auto gap-5  items-center justify-center">
+        <Link
+          to="/LogIn"
+          className="md:flex  gap-2 justify-center  hover:text-[#7f6727] text-nowrap  items-center fontMed hidden"
         >
-          <span>{t("header.Sign_in")}</span>
+          <span>{t("header.Log_in")}</span>
           <LoginOutlined />
-        </a>
+        </Link>
         <Select
           suffixIcon={<GlobalOutlined className=" text-gray-200 " />}
           defaultValue={lang}
@@ -77,12 +77,12 @@ export function NavBarMain() {
         />
       </div>
       <div className=" flex justify-center  items-center w-[100%] ">
-        <a href="#">
+        <Link to={"/"}>
           <img src={logo} alt="logo" className=" w-11" />
-        </a>
+        </Link>
       </div>
 
-      <div className="nav-links ms-auto md:static  md:min-h-fit md:items-center absolute bg-[#000915] min-h-[20vh] bottom-[240%] grid  left-0 md:w-auto md:py-0  w-full text-gray-200 fontMed ">
+      <div className="nav-links ms-auto md:static  md:min-h-fit md:items-center absolute bg-[#000915] min-h-[20vh] bottom-[240%] grid  left-0 md:w-auto md:py-0  w-full  text-gray-200 fontMed ">
         <ul className="flex md:flex-row flex-col  justify-center items-end gap-5 mr-5 ml-5 md:mr-0  md:items-center ">
           <li>
             <Dropdown
@@ -92,23 +92,27 @@ export function NavBarMain() {
               placement="bottom"
               arrow
             >
-              <button className=" flex justify-center gap-2 items-center">
+              <button className=" flex justify-center gap-2 items-center hover:text-[#7f6727]">
                 {t("header.Services")} <ReconciliationOutlined />
               </button>
             </Dropdown>
           </li>
 
           <li>
-            <a href="#" className="flex justify-center gap-2">
-              {t("header.My projects")} <AppstoreOutlined />{" "}
-            </a>
+            <Link
+              to="/MyProjects"
+              href="#"
+              className="flex justify-center gap-2 hover:text-[#7f6727]"
+            >
+              {t("header.My_projects")} <AppstoreOutlined />{" "}
+            </Link>
           </li>
           <li>
             <a
               href="#"
-              className="flex  gap-2 justify-center text-nowrap  items-center  md:hidden"
+              className="flex  gap-2 justify-center text-nowrap  items-center  md:hidden hover:text-[#7f6727]"
             >
-              <span>{t("header.Sign_in")}</span>
+              <span>{t("header.Log_in")}</span>
               <LoginOutlined />
             </a>
           </li>
@@ -120,6 +124,6 @@ export function NavBarMain() {
       >
         {toggleMob ? <UnorderedListOutlined /> : <CloseOutlined />}
       </div>
-    </div>
+    </nav>
   );
 }

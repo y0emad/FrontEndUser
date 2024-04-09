@@ -33,8 +33,8 @@ export function NavBarMain() {
     i18n.changeLanguage(lang);
     const htmlDir = document.documentElement.getAttribute("dir");
     lang === "ar"
-      ? document.documentElement.setAttribute("dir", "ltr")
-      : document.documentElement.setAttribute("dir", "rtl");
+      ? document.documentElement.setAttribute("dir", "rtl")
+      : document.documentElement.setAttribute("dir", "ltr");
   }, [lang]);
   const handleChangeLang = (value) => {
     setLang(() => value);
@@ -51,39 +51,8 @@ export function NavBarMain() {
         "grid grid-cols-3 h-16 bg-[#000915] z-50 items-center mx-auto fixed top-0 w-full"
       }
     >
-      <div className=" grid grid-cols-2 h-33 m-3  text-gray-200 me-auto gap-5  items-center justify-center">
-        <Link
-          to="/LogIn"
-          className="md:flex  gap-2 justify-center  hover:text-[#7f6727] text-nowrap  items-center fontMed hidden"
-        >
-          <span>{t("header.Log_in")}</span>
-          <LoginOutlined />
-        </Link>
-        <Select
-          suffixIcon={<GlobalOutlined className=" text-gray-200 " />}
-          defaultValue={lang}
-          style={{ width: 120 }}
-          onChange={handleChangeLang}
-          options={[
-            {
-              value: "ar",
-              label: "العربيه",
-            },
-            {
-              value: "en",
-              label: "English",
-            },
-          ]}
-        />
-      </div>
-      <div className=" flex justify-center  items-center w-[100%] ">
-        <Link to={"/"}>
-          <img src={logo} alt="logo" className=" w-11" />
-        </Link>
-      </div>
-
-      <div className="nav-links ms-auto md:static  md:min-h-fit md:items-center absolute bg-[#000915] min-h-[20vh] bottom-[240%] grid  left-0 md:w-auto md:py-0  w-full  text-gray-200 fontMed ">
-        <ul className="flex md:flex-row flex-col  justify-center items-end gap-5 mr-5 ml-5 md:mr-0  md:items-center ">
+      <div className="nav-links me-auto md:m-3 md:static  md:min-h-fit md:items-center absolute bg-[#000915] min-h-[20vh] bottom-[240%] grid  left-0 md:w-auto md:py-0  w-full  text-gray-200 fontMed ">
+        <ul className="flex md:flex-row flex-col md:justify-start  justify-center items-end gap-5 mr-5 ml-5   md:items-center ">
           <li>
             <Dropdown
               menu={{
@@ -102,27 +71,61 @@ export function NavBarMain() {
             <Link
               to="/MyProjects"
               href="#"
-              className="flex justify-center gap-2 hover:text-[#7f6727]"
+              className="flex justify-center gap-2 text-nowrap hover:text-[#7f6727]"
             >
               {t("header.My_projects")} <AppstoreOutlined />{" "}
             </Link>
           </li>
           <li>
-            <a
+            <Link
+              to="/LogIn"
               href="#"
               className="flex  gap-2 justify-center text-nowrap  items-center  md:hidden hover:text-[#7f6727]"
             >
               <span>{t("header.Log_in")}</span>
               <LoginOutlined />
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
       <div
-        className=" text-gray-200 flex justify-center text-2xl ms-auto m-3 md:hidden cursor-pointer"
+        className=" text-gray-200 flex justify-center text-2xl me-auto m-3 md:hidden cursor-pointer"
         onClick={handleToggle}
       >
         {toggleMob ? <UnorderedListOutlined /> : <CloseOutlined />}
+      </div>
+      <div className="flex justify-center  items-center w-[100%] ">
+        <Link to={"/"}>
+          <img src={logo} alt="logo" className=" w-11" />
+        </Link>
+      </div>
+      <div className=" grid md:grid-cols-2  grid-cols-1 h-33 m-3  text-gray-200 ms-auto  gap-5  items-center justify-center">
+        <Select
+          suffixIcon={
+            <GlobalOutlined className=" text-gray-200 pointer-events: none " />
+          }
+          className="ms-auto"
+          defaultValue={lang}
+          style={{ width: 120 }}
+          onChange={handleChangeLang}
+          options={[
+            {
+              value: "ar",
+              label: "العربيه",
+            },
+            {
+              value: "en",
+              label: "English",
+            },
+          ]}
+        />
+        <Link
+          to="/LogIn"
+          className="md:flex  gap-2 justify-center  hover:text-[#7f6727] text-nowrap  items-center fontMed hidden"
+        >
+          <span>{t("header.Log_in")}</span>
+          <LoginOutlined />
+        </Link>
       </div>
     </nav>
   );

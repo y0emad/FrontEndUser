@@ -12,5 +12,12 @@
   "error": {
     "error404": "Page Not Found",
     "Go_Home": "Go Home"
+  },
+  "Home": {
+    "mYE": "Making you easy.",
+    "Helwan_Printing": "Helwan Printing Press",
+    "iIP": "Innovation in print.",
+    "content": "The site provides all kinds of printing, printing books, posters, paper, personal cards and catalogs",
+    "Know_More": "Know More"
   }
 }

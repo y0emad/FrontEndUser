@@ -53,3 +53,8 @@
 .ant-select-selection-item {
   color: #e5e7eb !important;
 }
+
+body {
+  padding: 0;
+  margin: 0;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles.css";
 import ReactDOM from "react-dom/client";
 import global_en from "./translation/en/global.json";
 import global_ar from "./translation/ar/global.json";

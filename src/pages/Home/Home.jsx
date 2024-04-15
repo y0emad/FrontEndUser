@@ -50,7 +50,7 @@ export function Home() {
             <h2 className="fontOneLight text-gray-200 text-3xl mt-2 mb-5">
               {t("Home.content")}
             </h2>
-            <Link to="/LogIn">
+            <Link to="/About">
               <button className="relative px-8 sm:mt-10 mt-0 text-lg py-3 font-bold rounded-md bg-[#7f6727] isolation-auto z-10 border-2 border-[#000915] before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-right-full before:hover:right-0 before:rounded-full before:bg-gray-200 before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 fontBold">
                 {t("Home.Know_More")}
               </button>

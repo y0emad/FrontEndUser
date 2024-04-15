@@ -55,7 +55,7 @@ export function FooterMain() {
       <div className="text-gray-200 text-center fontTwoLight h-fit">
         {t("footer.copyright")}
       </div>
-      <div className="text-gray-200   w-fit h-fit   text-lg flex sm:top-auto gap-3 items-center    sm:absolute sm:right-7 justify-self-center">
+      <div className="text-gray-200   w-fit h-fit  text-lg flex sm:top-auto gap-3 items-center    sm:absolute sm:right-7 justify-self-center">
         <a href="http://www.facebook.com">
           <FacebookFilled className="hover:text-[#7f6727]" />
         </a>

@@ -73,7 +73,7 @@ export function Home() {
             }}
             className=" bg-transparent  border-0 "
             cover={
-              <Link to="/">
+              <Link to="/Product">
                 <img
                   className="rounded-full w-[210px] h-[200px]"
                   style={{ borderRadius: 100 }}
@@ -87,7 +87,7 @@ export function Home() {
               className=" text-center "
               title={
                 <Link
-                  to="/"
+                  to="/Product"
                   className=" text-gray-200 hover:text-[#7f6727] text-lg"
                 >
                   Books

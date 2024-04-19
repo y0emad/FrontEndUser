@@ -5,6 +5,7 @@ import { LayoutError } from "./layouts/LayoutError";
 import { LogIn } from "./pages/Log_in/LogIn";
 import { MyProjects } from "./pages/My_Projects/MyProjects";
 import { About } from "./pages/About/About";
+import { Product } from "./pages/Product/Product";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
       { path: "/LogIn", element: <LogIn /> },
       { path: "/MyProjects", element: <MyProjects /> },
       { path: "/About", element: <About /> },
+      { path: "/Product", element: <Product /> },
     ],
   },
 ]);

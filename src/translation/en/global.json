@@ -30,5 +30,14 @@
     "ezEx": "Easy Access",
     "justRight": "A “just-right” selection",
     "printEv": "Print Every Things"
+  },
+  "Product": {
+    "Your_Details": "Your Details.",
+    "Make_Order": "Make an Order",
+    "Quantity": "Quantity",
+    "Upload_file": "Upload file",
+    "Send": "Send",
+    "Sending": "Sending...",
+    "Cancel": "Cancel"
   }
 }

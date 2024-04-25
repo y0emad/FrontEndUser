@@ -13,9 +13,6 @@ export function LayoutMain() {
         <div>
           <NavBarMain />
           <Loading />
-          <div style={{ paddingTop: "4rem" }}>
-            <FooterMain />
-          </div>
         </div>
       ) : (
         <div>

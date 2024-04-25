@@ -3,7 +3,7 @@ import "../styles.css";
 import logo from "../images/logo.png";
 import { Dropdown, Select } from "antd";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import {
   GlobalOutlined,
   LoginOutlined,
@@ -14,21 +14,13 @@ import {
 } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import UseFetch from "../hooks/UseFetch";
 
 export function NavBarMain() {
   const [t, i18n] = useTranslation("global");
   const [toggleMob, setToggleMob] = useState(true);
   const [lang, setLang] = useLocalStorage("lang", "ar");
-  const items = [
-    {
-      key: "1",
-      label: <a className="fontThreeLight">{t("header.Books")}</a>,
-    },
-    {
-      key: "2",
-      label: <a className="fontThreeLight">{t("header.Brochures")}</a>,
-    },
-  ];
+  const [products, setProducts] = useState([]);
   useEffect(() => {
     i18n.changeLanguage(lang);
     const htmlDir = document.documentElement.getAttribute("dir");
@@ -36,6 +28,40 @@ export function NavBarMain() {
       ? document.documentElement.setAttribute("dir", "rtl")
       : document.documentElement.setAttribute("dir", "ltr");
   }, [lang]);
+  useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+    fetch("https://printing-sys-fojo.vercel.app/products", { signal })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setProducts(data.data);
+      })
+      .catch((error) => {
+        if (error.name === "AbortError") {
+        } else {
+          console.error("Error fetching data:", error);
+        }
+      });
+    return () => {
+      abortController.abort();
+    };
+  }, []);
+  const items = products.map((product) => {
+    return {
+      key: product._id,
+      label: (
+        <Link className="fontThreeLight" to={`/Product/${product._id}`}>
+          {product.name}
+        </Link>
+      ),
+    };
+  });
+
   const handleChangeLang = (value) => {
     setLang(() => value);
     i18n.changeLanguage(value);
@@ -70,7 +96,6 @@ export function NavBarMain() {
           <li>
             <Link
               to="/MyProjects"
-              href="#"
               className="flex justify-center gap-2 text-nowrap hover:text-[#7f6727]"
             >
               {t("header.My_projects")} <AppstoreOutlined />{" "}
@@ -79,7 +104,6 @@ export function NavBarMain() {
           <li>
             <Link
               to="/LogIn"
-              href="#"
               className="flex  gap-2 justify-center text-nowrap  items-center  md:hidden hover:text-[#7f6727]"
             >
               <span>{t("header.Log_in")}</span>

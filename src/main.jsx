@@ -10,6 +10,7 @@ import { router } from "./router.jsx";
 i18next.init({
   interpolation: { escapeValue: false },
   lng: "ar",
+  failbackLng: "ar",
   resources: {
     en: {
       global: global_en,

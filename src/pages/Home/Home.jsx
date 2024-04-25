@@ -4,15 +4,16 @@ import "../../index.css";
 import "./home.css";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { UpSquareOutlined } from "@ant-design/icons";
 import { Card } from "antd";
 import ScrollToTop from "react-scroll-to-top";
 const { Meta } = Card;
 
-export function Home() {
+function Home() {
   const [t, i18n] = useTranslation("global");
   const [lang, setLang] = useLocalStorage("lang", "ar");
+  const all_products = useLoaderData();
 
   useEffect(() => {
     i18n.changeLanguage(lang);
@@ -63,301 +64,54 @@ export function Home() {
           {t("Home.all_products")}
         </h2>
         <div className=" flex justify-evenly  flex-wrap mr-5 ml-5 gap-10 ">
-          {" "}
-          <Card
-            hoverable
-            style={{
-              width: 215,
-              height: 280,
-              padding: 3,
-            }}
-            className=" bg-transparent  border-0 "
-            cover={
-              <Link to="/Product">
-                <img
-                  className="rounded-full w-[210px] h-[200px]"
-                  style={{ borderRadius: 100 }}
-                  alt="books"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                />
-              </Link>
-            }
-          >
-            <Meta
-              className=" text-center "
-              title={
-                <Link
-                  to="/Product"
-                  className=" text-gray-200 hover:text-[#7f6727] text-lg"
-                >
-                  Books
+          {all_products.data.map((product) => (
+            <Card
+              key={product._id}
+              hoverable
+              style={{
+                width: 215,
+                height: 280,
+                padding: 3,
+              }}
+              className=" bg-transparent  border-0 "
+              cover={
+                <Link to={`/Product/${product._id}`}>
+                  <img
+                    className="rounded-full w-[210px] h-[200px]"
+                    style={{ borderRadius: 100 }}
+                    alt={`${product.name}`}
+                    src={`${product.image}`}
+                  />
                 </Link>
               }
-            />
-          </Card>
-          <Card
-            hoverable
-            style={{
-              width: 215,
-              height: 280,
-              padding: 3,
-            }}
-            className=" bg-transparent  border-0 "
-            cover={
-              <img
-                className="rounded-full w-[210px] h-[200px]"
-                style={{ borderRadius: 100 }}
-                alt="books"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+            >
+              <Meta
+                className=" text-center "
+                title={
+                  <Link
+                    to={`/Product/${product._id}`}
+                    className=" text-gray-200 hover:text-[#7f6727] text-lg"
+                  >
+                    {product.name}
+                  </Link>
+                }
               />
-            }
-          >
-            <Meta
-              className=" text-center "
-              title={
-                <Link
-                  to="/"
-                  className=" text-gray-200 hover:text-[#B38F00] text-lg"
-                >
-                  Books
-                </Link>
-              }
-            />
-          </Card>
-          <Card
-            hoverable
-            style={{
-              width: 215,
-              height: 280,
-              padding: 3,
-            }}
-            className=" bg-transparent  border-0 "
-            cover={
-              <img
-                className="rounded-full w-[210px] h-[200px]"
-                style={{ borderRadius: 100 }}
-                alt="books"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              />
-            }
-          >
-            <Meta
-              className=" text-center "
-              title={
-                <Link
-                  to="/"
-                  className=" text-gray-200 hover:text-[#B38F00] text-lg"
-                >
-                  Books
-                </Link>
-              }
-            />
-          </Card>
-          <Card
-            hoverable
-            style={{
-              width: 215,
-              height: 280,
-              padding: 3,
-            }}
-            className=" bg-transparent  border-0 "
-            cover={
-              <img
-                className="rounded-full w-[210px] h-[200px]"
-                style={{ borderRadius: 100 }}
-                alt="books"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              />
-            }
-          >
-            <Meta
-              className=" text-center "
-              title={
-                <Link
-                  to="/"
-                  className=" text-gray-200 hover:text-[#B38F00] text-lg"
-                >
-                  Books
-                </Link>
-              }
-            />
-          </Card>
-          <Card
-            hoverable
-            style={{
-              width: 215,
-              height: 280,
-              padding: 3,
-            }}
-            className=" bg-transparent  border-0 "
-            cover={
-              <img
-                className="rounded-full w-[210px] h-[200px]"
-                style={{ borderRadius: 100 }}
-                alt="books"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              />
-            }
-          >
-            <Meta
-              className=" text-center "
-              title={
-                <Link
-                  to="/"
-                  className=" text-gray-200 hover:text-[#B38F00] text-lg"
-                >
-                  Books
-                </Link>
-              }
-            />
-          </Card>
-          <Card
-            hoverable
-            style={{
-              width: 215,
-              height: 280,
-              padding: 3,
-            }}
-            className=" bg-transparent  border-0 "
-            cover={
-              <img
-                className="rounded-full w-[210px] h-[200px]"
-                style={{ borderRadius: 100 }}
-                alt="books"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              />
-            }
-          >
-            <Meta
-              className=" text-center "
-              title={
-                <Link
-                  to="/"
-                  className=" text-gray-200 hover:text-[#B38F00] text-lg"
-                >
-                  Books
-                </Link>
-              }
-            />
-          </Card>
-          <Card
-            hoverable
-            style={{
-              width: 215,
-              height: 280,
-              padding: 3,
-            }}
-            className=" bg-transparent  border-0 "
-            cover={
-              <img
-                className="rounded-full w-[210px] h-[200px]"
-                style={{ borderRadius: 100 }}
-                alt="books"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              />
-            }
-          >
-            <Meta
-              className=" text-center "
-              title={
-                <Link
-                  to="/"
-                  className=" text-gray-200 hover:text-[#B38F00] text-lg"
-                >
-                  Books
-                </Link>
-              }
-            />
-          </Card>
-          <Card
-            hoverable
-            style={{
-              width: 215,
-              height: 280,
-              padding: 3,
-            }}
-            className=" bg-transparent  border-0 "
-            cover={
-              <img
-                className="rounded-full w-[210px] h-[200px]"
-                style={{ borderRadius: 100 }}
-                alt="books"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              />
-            }
-          >
-            <Meta
-              className=" text-center "
-              title={
-                <Link
-                  to="/"
-                  className=" text-gray-200 hover:text-[#B38F00] text-lg"
-                >
-                  Books
-                </Link>
-              }
-            />
-          </Card>
-          <Card
-            hoverable
-            style={{
-              width: 215,
-              height: 280,
-              padding: 3,
-            }}
-            className=" bg-transparent  border-0 "
-            cover={
-              <img
-                className="rounded-full w-[210px] h-[200px]"
-                style={{ borderRadius: 100 }}
-                alt="books"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              />
-            }
-          >
-            <Meta
-              className=" text-center "
-              title={
-                <Link
-                  to="/"
-                  className=" text-gray-200 hover:text-[#B38F00] text-lg"
-                >
-                  Books
-                </Link>
-              }
-            />
-          </Card>
-          <Card
-            hoverable
-            style={{
-              width: 215,
-              height: 280,
-              padding: 3,
-            }}
-            className=" bg-transparent  border-0 "
-            cover={
-              <img
-                className="rounded-full w-[210px] h-[200px]"
-                style={{ borderRadius: 100 }}
-                alt="books"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              />
-            }
-          >
-            <Meta
-              className=" text-center "
-              title={
-                <Link
-                  to="/"
-                  className=" text-gray-200 hover:text-[#B38F00] text-lg"
-                >
-                  Books
-                </Link>
-              }
-            />
-          </Card>
+            </Card>
+          ))}{" "}
         </div>
       </div>
     </div>
   );
 }
+
+const loader = async ({ request: { signal } }) => {
+  const all_products = await fetch(
+    "https://printing-sys-fojo.vercel.app/products",
+    {
+      signal,
+    }
+  );
+  return all_products;
+};
+
+export const HomeFunc = { element: <Home />, loader };

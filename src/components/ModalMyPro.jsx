@@ -1,8 +1,20 @@
 import { Modal } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Steps } from "antd";
-import { CheckCircleFilled } from "@ant-design/icons";
+import {
+  CheckCircleFilled,
+  ClockCircleFilled,
+  CloseCircleFilled,
+} from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
+import useLocalStorage from "../hooks/useLocalStorage";
 export default function ModalMyPro({ num }) {
+  const [t, i18n] = useTranslation("global");
+  const [lang, setLang] = useLocalStorage("lang", "ar");
+
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [lang]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStatusOpen, setIsStatusOpen] = useState(false);
 
@@ -40,7 +52,7 @@ export default function ModalMyPro({ num }) {
               className="cursor-pointer relative group overflow-hidden border-2 px-8 py-2 border-gray-200"
             >
               <span className="font-bold text-[#000915] text-xl relative z-10 group-hover:text-gray-200 duration-500">
-                Details
+                {t("ModalMyPro.Details")}
               </span>
               <span className="absolute top-0 left-0 w-full bg-gray-200 duration-500 group-hover:-translate-x-full h-full"></span>
               <span className="absolute top-0 left-0 w-full bg-gray-200 duration-500 group-hover:translate-x-full h-full"></span>
@@ -50,7 +62,7 @@ export default function ModalMyPro({ num }) {
             </button>
           </h6>
           <Modal
-            title={`Details${num}`}
+            title={t("ModalMyPro.Details")}
             open={isModalOpen}
             onOk={() => handleOk("Details")}
             key="Details"
@@ -61,14 +73,14 @@ export default function ModalMyPro({ num }) {
               <div className=" w-full flex flex-wrap gap-2 items-center ">
                 {" "}
                 <h1 className="text-2xl font-medium text-[#ad8d36]">
-                  Name :
+                  {t("ModalMyPro.Name")} :
                 </h1>{" "}
                 <h1 className=" text-xl text-gray-200">Perfume Bottle</h1>
               </div>
               <div className=" w-full flex flex-wrap gap-2 items-center">
                 {" "}
                 <h1 className="text-2xl font-medium text-[#ad8d36]">
-                  Quantity :
+                  {t("ModalMyPro.Quantity")} :
                 </h1>{" "}
                 <h1 className=" text-xl text-gray-200">7</h1>
               </div>
@@ -76,7 +88,7 @@ export default function ModalMyPro({ num }) {
               <div className=" w-full flex flex-wrap gap-2 items-center ">
                 {" "}
                 <h1 className="text-2xl font-medium text-[#ad8d36]">
-                  file :
+                  {t("ModalMyPro.File_Name")} :
                 </h1>{" "}
                 <h1 className=" text-xl text-gray-200">
                   fdssssssssssssssssDFDSffffffffdsaaaa
@@ -91,7 +103,7 @@ export default function ModalMyPro({ num }) {
               className="cursor-pointer relative group overflow-hidden border-2 px-8 py-2 border-gray-200"
             >
               <span className="font-bold text-[#000915] text-xl relative z-10 group-hover:text-gray-200 duration-500">
-                Status
+                {t("ModalMyPro.Status")}
               </span>
               <span className="absolute top-0 left-0 w-full bg-gray-200 duration-500 group-hover:-translate-x-full h-full"></span>
               <span className="absolute top-0 left-0 w-full bg-gray-200 duration-500 group-hover:translate-x-full h-full"></span>
@@ -103,19 +115,49 @@ export default function ModalMyPro({ num }) {
           <h6 className="text-gray-200 disabled font-manrope   font-bold text-2xl leading-9 w-full max-w-[176px] text-center">
             <button className=" bg-[#7f6727]  border-2 px-5 py-2 cursor-auto  text-nowrap border-[#7f6727]">
               <span className="font-bold text-gray-200 text-xl mx-2 ">
-                Received
+                {t("ModalMyPro.Received")}
               </span>
               <CheckCircleFilled className=" text-lg" />
             </button>
           </h6>
           <Modal
-            title={`status${num}`}
+            title={t("ModalMyPro.Status")}
             open={isStatusOpen}
             onOk={() => handleOk("Status")}
             key="status"
             footer={null}
             onCancel={() => handleCancel("Status")}
           >
+            <h1 className=" mt-9 text-2xl font-bold items-center text-nowrap gap-2">
+              <span className=" text-[#b99638]">
+                {" "}
+                {t("ModalMyPro.StatusOfAccept")} :
+              </span>{" "}
+              <span className="  sm:inline-flex  flex flex-wrap  items-center gap-2">
+                <h2> {t("ModalMyPro.Waiting")} </h2>
+                <ClockCircleFilled className=" text-lg text-[#b99638]" />
+              </span>
+            </h1>
+            <h1 className=" mt-9 text-2xl font-bold items-center text-nowrap gap-2">
+              <span className=" text-[#b99638]">
+                {" "}
+                {t("ModalMyPro.StatusOfAccept")} :
+              </span>{" "}
+              <span className="  sm:inline-flex  flex flex-wrap  items-center gap-2">
+                <h2> {t("ModalMyPro.Deny")} </h2>
+                <CloseCircleFilled className=" text-lg text-red-500" />
+              </span>
+            </h1>
+            <h1 className=" mt-9 text-2xl font-bold items-center text-nowrap gap-2">
+              <span className=" text-[#b99638]">
+                {" "}
+                {t("ModalMyPro.StatusOfAccept")} :
+              </span>{" "}
+              <span className="  sm:inline-flex  flex flex-wrap  items-center gap-2">
+                <h2> {t("ModalMyPro.Accept")} </h2>
+                <CheckCircleFilled className=" text-lg text-green-500" />
+              </span>
+            </h1>
             <Steps
               className=" mt-10 "
               current={2}
@@ -123,16 +165,16 @@ export default function ModalMyPro({ num }) {
               size="large"
               items={[
                 {
-                  title: "You paid the bill for the book now will be printed.",
+                  title: t("ModalMyPro.stat1"),
                 },
                 {
-                  title: "Printed of the book is finished.",
+                  title: t("ModalMyPro.stat2"),
                 },
                 {
-                  title: "Covered of the book is finished.",
+                  title: t("ModalMyPro.stat3"),
                 },
                 {
-                  title: "The book is ready.",
+                  title: t("ModalMyPro.stat4"),
                 },
               ]}
             />

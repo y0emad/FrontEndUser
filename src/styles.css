@@ -112,6 +112,11 @@
   > .ant-steps-icon {
   color: #e5e7eb !important;
 }
+:where(.css-dev-only-do-not-override-11xg00t).ant-steps.ant-steps-vertical
+  > .ant-steps-item
+  .ant-steps-item-icon:dir(rtl) {
+  float: right;
+}
 body {
   padding: 0;
   margin: 0;

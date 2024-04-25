@@ -39,5 +39,24 @@
     "Send": "Send",
     "Sending": "Sending...",
     "Cancel": "Cancel"
+  },
+  "ModalMyPro": {
+    "Product": "Product",
+    "Details": "Details",
+    "Status": "Status",
+    "Waiting": "Waiting for a response",
+    "Accept": "Accepted",
+    "Deny": "Rejected",
+    "StatusOfAccept": "Status Of Order",
+    "Name": "Name",
+
+    "File_Name": "File Name",
+    "Quantity": "Quantity",
+    "My_Projects": "My Projects",
+    "Received": "Received",
+    "stat1": "You paid the bill for the book now will be printed.",
+    "stat2": "Printed of the book is finished.",
+    "stat3": "Covered of the book is finished.",
+    "stat4": "The book is ready."
   }
 }

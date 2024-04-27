@@ -59,7 +59,7 @@ export default function ResetPassword() {
         <div className={Reset.section}>
             {errorMeg ? <div className={Reset.alert + ' text-red-200 shadow-inner rounded p-3 bg-red-300 mt-2 text-center'}>{errorMeg}</div> : ""}
             {successMsg ? <div className={Reset.alert + ' text-red-200 shadow-inner rounded p-3 bg-green-300 mt-2 text-center'}>{successMsg}</div> : ""}
-            <h2 className={Reset.header}>Sign up</h2>
+            <h2 className={Reset.header}>Reset Password</h2>
             <form onSubmit={formikObj.handleSubmit}>
 
 

@@ -98,7 +98,6 @@ export default function Registeration() {
                             wrapperClass=""
                         /> : "Sign up"}
                     </button>
-  
                         <Link className={SignUp.fancy} to={"/LogIn"}>
                             <span className={SignUp.topKey}></span>
                             <span className={SignUp.text}>Log in</span>

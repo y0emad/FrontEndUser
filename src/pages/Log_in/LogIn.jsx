@@ -90,15 +90,19 @@ export function LogIn() {
               wrapperClass=""
             /> : "Login"}
           </button>
-          <button className={LOGIN.loginbtn} >
-            <Link to={"/Registeration"}>
-              <i className="fa-solid fa-minus"></i> Sign up
+
+            <Link className={LOGIN.fancy} to={"/Registeration"}>
+              <span className={LOGIN.topKey}></span>
+              <span className={LOGIN.text}>Sign up</span>
+              <span className={LOGIN.bottomKey1}></span>
+              <span className={LOGIN.bottomKey2}></span>
             </Link>
-          </button>
+
         </div>
         <div className={LOGIN.forget}>
           <Link to={"/ForgetPassword"} className={LOGIN.forgettext}>Forget Password?
           </Link>
+
         </div>
       </form>
     </div>

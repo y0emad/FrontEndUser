@@ -16,10 +16,10 @@ export default function Registeration() {
     async function sendingData(values) {
         setIsLoading(true)
         try {
-            let  {data}  = await axios.post("http://localhost:4000/auth/register", values)
+            let { data } = await axios.post("http://localhost:4000/auth/register", values)
             console.log(data);
 
-            if (data.message ) {
+            if (data.message) {
                 setSuccessMsg(data.message);
                 setTimeout(function () {
                     navigate('/VerifyEmail');
@@ -98,11 +98,14 @@ export default function Registeration() {
                             wrapperClass=""
                         /> : "Sign up"}
                     </button>
-                    <button className={SignUp.loginbtn} >
-                        <Link to={"/LogIn"}>
-                            <i className="fa-solid fa-minus"></i> Log in
+  
+                        <Link className={SignUp.fancy} to={"/LogIn"}>
+                            <span className={SignUp.topKey}></span>
+                            <span className={SignUp.text}>Log in</span>
+                            <span className={SignUp.bottomKey1}></span>
+                            <span className={SignUp.bottomKey2}></span>
                         </Link>
-                    </button>
+
                 </div>
             </form>
         </div>

@@ -17,15 +17,28 @@ export default function ModalMyPro({ num }) {
   }, [lang]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStatusOpen, setIsStatusOpen] = useState(false);
+  const [isMsgOpen, setIsMsgOpen] = useState(false);
 
   const showModal = (key) => {
-    return key === "Details" ? setIsModalOpen(true) : setIsStatusOpen(true);
+    return key === "Details"
+      ? setIsModalOpen(true)
+      : key === "Status"
+      ? setIsStatusOpen(true)
+      : setIsMsgOpen(true);
   };
   const handleOk = (key) => {
-    return key === "Details" ? setIsModalOpen(false) : setIsStatusOpen(false);
+    return key === "Details"
+      ? setIsModalOpen(false)
+      : key === "Status"
+      ? setIsStatusOpen(false)
+      : setIsMsgOpen(false);
   };
   const handleCancel = (key) => {
-    return key === "Details" ? setIsModalOpen(false) : setIsStatusOpen(false);
+    return key === "Details"
+      ? setIsModalOpen(false)
+      : key === "Status"
+      ? setIsStatusOpen(false)
+      : setIsMsgOpen(false);
   };
 
   return (
@@ -178,6 +191,18 @@ export default function ModalMyPro({ num }) {
                 },
               ]}
             />
+          </Modal>
+          <Modal
+            title="Messages"
+            open={isMsgOpen}
+            onOk={() => handleOk("Messages")}
+            key="Messages"
+            footer={null}
+            onCancel={() => handleCancel("Messages")}
+          >
+            <h1 className=" mt-9 text-2xl font-bold items-center text-nowrap gap-2">
+              <span className=" text-[#b99638]"> Messages :</span>{" "}
+            </h1>
           </Modal>
           <></>
         </div>

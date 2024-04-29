@@ -2,10 +2,15 @@ import { useTranslation } from "react-i18next";
 import ModalMyPro from "../../components/ModalMyPro";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useEffect } from "react";
-export function MyProjects() {
+import { useLoaderData } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { ssrExportAllKey } from "vite/runtime";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+function MyProjects() {
   const [t, i18n] = useTranslation("global");
   const [lang, setLang] = useLocalStorage("lang", "ar");
-
+  const my_projects = useLoaderData();
+  console.log("my_projects", my_projects);
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);
@@ -38,3 +43,26 @@ export function MyProjects() {
     </div>
   );
 }
+
+const loader = async ({ request }) => {
+  const token = localStorage.getItem("tkn");
+  const tokenDecode = jwtDecode(localStorage.getItem("tkn"));
+  const my_projects = await fetch(
+    `http://localhost:4000/orders/orderHistory/${tokenDecode.userId}`,
+    {
+      signal: request.signal,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return my_projects;
+};
+export const MyProjectsFunc = {
+  element: (
+    <ProtectedRoute>
+      <MyProjects />
+    </ProtectedRoute>
+  ),
+  loader,
+};

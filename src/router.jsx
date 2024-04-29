@@ -3,14 +3,14 @@ import { HomeFunc } from "./pages/Home/Home";
 import { LayoutMain } from "./layouts/LayoutMain";
 import { LayoutError } from "./layouts/LayoutError";
 
-import { MyProjects } from "./pages/My_Projects/MyProjects";
+import { MyProjectsFunc } from "./pages/My_Projects/MyProjects";
 import { About } from "./pages/About/About";
 import { ProductFunc } from "./pages/Product/Product";
-import Registeration from './pages/Registeration/Registeration';
-import VerifyEmail from './pages/VerifyEmail/VerifyEmail';
+import Registeration from "./pages/Registeration/Registeration";
+import VerifyEmail from "./pages/VerifyEmail/VerifyEmail";
 import { LogIn } from "./pages/Log_in/LogIn";
-import ForgetPassword from './pages/ForgetPassword/ForgetPassword';
-import ResetPassword from './pages/ResetPassword/ResetPassword';
+import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
 
 export const router = createBrowserRouter([
@@ -25,9 +25,8 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/MyProjects", element: <ProtectedRoute>
-          <MyProjects />
-        </ProtectedRoute>
+        path: "/MyProjects",
+        ...MyProjectsFunc,
       },
       { path: "/LogIn", element: <LogIn /> },
       { path: "/Registeration", element: <Registeration /> },

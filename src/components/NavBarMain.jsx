@@ -18,12 +18,11 @@ import { useTranslation } from "react-i18next";
 import { authContext } from "../Context/authentication";
 
 export function NavBarMain() {
-
   const [t, i18n] = useTranslation("global");
   const [toggleMob, setToggleMob] = useState(true);
   const [lang, setLang] = useLocalStorage("lang", "ar");
   const [products, setProducts] = useState([]);
-  const { token, setToken } = useContext(authContext)
+  const { token, setToken } = useContext(authContext);
   const NavFunc = useNavigate();
   useEffect(() => {
     i18n.changeLanguage(lang);
@@ -79,9 +78,8 @@ export function NavBarMain() {
     localStorage.removeItem("tkn");
     setToken(null);
     setTimeout(() => {
-
-      NavFunc("/LogIn")
-    }, 2000)
+      NavFunc("/LogIn");
+    }, 2000);
   }
   return (
     <nav
@@ -105,38 +103,39 @@ export function NavBarMain() {
             </Dropdown>
           </li>
 
-
-          {token ? <>
-            <li>
-              <Link
-                to="/MyProjects"
-                className="flex justify-center gap-2 text-nowrap hover:text-[#7f6727]"
-              >
-                {t("header.My_projects")} <AppstoreOutlined />{" "}
-              </Link>
-            </li>
-            <li>
-              <span
-                onClick={logOut}
-                className="flex  gap-2 justify-center text-nowrap  items-center  lg:hidden hover:text-[#7f6727] cursor-pointer"
-              >
-                <span>{t("header.Log_out")}</span>
-                <LogoutOutlined />
-              </span>
-            </li>
-          </> : <>
-            <li>
-              <Link
-                to="/LogIn"
-                className="flex  gap-2 justify-center text-nowrap  items-center  md:hidden hover:text-[#7f6727]"
-              >
-                <span>{t("header.Log_in")}</span>
-                <LoginOutlined />
-              </Link>
-            </li>
-
-          </>}
-
+          {token ? (
+            <>
+              <li>
+                <Link
+                  to="/MyProjects"
+                  className="flex justify-center gap-2 text-nowrap hover:text-[#7f6727]"
+                >
+                  {t("header.My_projects")} <AppstoreOutlined />{" "}
+                </Link>
+              </li>
+              <li>
+                <span
+                  onClick={logOut}
+                  className="flex  gap-2 justify-center text-nowrap  items-center  md:hidden hover:text-[#7f6727] cursor-pointer"
+                >
+                  <span>{t("header.Log_out")}</span>
+                  <LogoutOutlined />
+                </span>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link
+                  to="/LogIn"
+                  className="flex  gap-2 justify-center text-nowrap  items-center  md:hidden hover:text-[#7f6727]"
+                >
+                  <span>{t("header.Log_in")}</span>
+                  <LoginOutlined />
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
       <div
@@ -170,18 +169,17 @@ export function NavBarMain() {
             },
           ]}
         />
-        {token ?
+        {token ? (
           <>
             <span
-
               onClick={logOut}
               className="md:flex  gap-2 justify-center  hover:text-[#7f6727] text-nowrap  items-center fontMed hidden cursor-pointer"
             >
               <span>{t("header.Log_out")}</span>
               <LogoutOutlined />
             </span>
-
-          </> :
+          </>
+        ) : (
           <>
             <Link
               to="/LogIn"
@@ -190,9 +188,8 @@ export function NavBarMain() {
               <span>{t("header.Log_in")}</span>
               <LoginOutlined />
             </Link>
-
-          </>}
-
+          </>
+        )}
       </div>
     </nav>
   );

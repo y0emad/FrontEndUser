@@ -10,7 +10,6 @@ function MyProjects() {
   const [t, i18n] = useTranslation("global");
   const [lang, setLang] = useLocalStorage("lang", "ar");
   const my_projects = useLoaderData();
-  console.log("my_projects", my_projects);
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);
@@ -33,11 +32,14 @@ function MyProjects() {
               <span className="w-full max-w-[176px] text-center">
                 {t("ModalMyPro.Status")}
               </span>
+              <span className="w-full max-w-[176px] text-center ">
+                Messages{" "}
+              </span>
             </p>
           </div>
-
-          <ModalMyPro num={1} />
-          <ModalMyPro num={2} />
+          {my_projects.data.map((order) => (
+            <ModalMyPro key={order._id} {...order} />
+          ))}
         </div>
       </section>
     </div>

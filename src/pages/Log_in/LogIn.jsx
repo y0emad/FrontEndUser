@@ -6,14 +6,15 @@ import axios from 'axios'
 import * as Yup from 'yup'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import { ThreeCircles } from 'react-loader-spinner'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { authContext } from '../../Context/authentication'
 export function LogIn() {
 
   const [errorMeg, setErorrMsg] = useState(null);
   const [successMsg, setSuccessMsg] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
+  const { setToken } = useContext(authContext)
 
   async function sendingData(values) {
     setIsLoading(true)
@@ -23,7 +24,9 @@ export function LogIn() {
       //http://localhost:4000/auth/login
       // https://printing-sys-fojo.vercel.app/auth/register
 
-      if (data.message) {
+      if (data.message === "Login successful.") {
+        localStorage.setItem( "tkn", data.token )
+        setToken(data.token)
         setSuccessMsg(data.message);
         setTimeout(function () {
           navigate('/');
@@ -38,11 +41,10 @@ export function LogIn() {
     setIsLoading(false)
   }
 
-  let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-  let validationSchema = Yup.object({
-    email: Yup.string().email("E-mail should include '@' ").required("E-mail is required"),
 
-    password: Yup.string().matches(passwordRegex, "Password at least containt Minimum 8 characters, at least one uppercase letter and one lowercase letter .").required("Password is required"),
+  let validationSchema = Yup.object({
+
+
 
   })
   let formikObj = useFormik({

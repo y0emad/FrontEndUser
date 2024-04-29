@@ -4,7 +4,8 @@
     "Brochures": "Brochures",
     "Services": "Services",
     "My_projects": "My projects",
-    "Log_in": "Log in"
+    "Log_in": "Log in",
+    "Log_out":"Log Out"
   },
   "footer": {
     "copyright": "all rights reserved © the electronic portal of the scientific calculation Center 2024"

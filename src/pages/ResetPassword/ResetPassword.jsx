@@ -1,11 +1,11 @@
 import {  useNavigate } from 'react-router-dom'
 import Reset from './resetPassword.module.css'
-import { useFormik } from 'formik'
 import axios from 'axios'
 import * as Yup from 'yup'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import { ThreeCircles } from 'react-loader-spinner'
 import { useState } from 'react'
+import { useFormik } from 'formik';
 
 export default function ResetPassword() {
 
@@ -95,7 +95,4 @@ export default function ResetPassword() {
             </form>
         </div>
     </div>
-    // http://localhost:4000/auth/register
-    // https://printing-sys-fojo.vercel.app/auth/register
-    // https://ecommerce.routemisr.com/api/v1/auth/signup
 }

@@ -8,9 +8,15 @@ import {
   useNavigation,
   useActionData,
   redirect,
+  Navigate,
+  Link,
 } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { useContext } from "react";
+import { authContext } from './../../Context/authentication';
+
+
 
 function Product() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,7 +25,7 @@ function Product() {
   const { state } = useNavigation();
   const [t, i18n] = useTranslation("global");
   const [lang, setLang] = useLocalStorage("lang", "ar");
-
+  const { token } = useContext(authContext);
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);
@@ -33,20 +39,21 @@ function Product() {
     setIsModalOpen(false);
   };
   return (
+
     <div className="grid lg:grid-cols-2 grid-cols-1 text-gray-200  lg:mt-24 mt-5 mb-16">
+
       <div className=" p-10 mb-10 lg:mb-0">
         <h1 className=" text-3xl font-bold mb-5">{product.data.name}</h1>
         <h2 className=" text-lg mb-8">{product.data.description}</h2>
         <>
-          <button
+        {token ? <><button
             type="button"
             className="bg-[#7f6727] text-[#000915] text-lg font-medium rounded-2xl py-3 px-6 hover:bg-gray-200 transition-colors duration-300"
             onClick={showModal}
           >
             {t("Product.Make_Order")}
           </button>
-
-          <Modal
+           <Modal
             title={t("Product.Your_Details")}
             footer={null}
             open={isModalOpen}
@@ -144,7 +151,17 @@ function Product() {
                 {t("Product.Cancel")}
               </button>
             </Form>
-          </Modal>
+          </Modal> </>:         <Link to={"/LogIn"}>
+          <button
+            type="button"
+            className="bg-[#7f6727] text-[#000915] text-lg font-medium rounded-2xl py-3 px-6 hover:bg-gray-200 transition-colors duration-300"
+            onClick={showModal}
+          >
+            {t("Product.Make_Order")}
+          </button>
+          </Link>
+          }
+
         </>
       </div>
       <div className="relative justify-self-center">
@@ -164,6 +181,7 @@ function Product() {
     </div>
   );
 }
+
 
 const loader = async ({ request: { signal }, params }) => {
   const product = await fetch(

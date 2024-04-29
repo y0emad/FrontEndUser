@@ -5,6 +5,7 @@ import { Loading } from "../pages/Loading/Loading";
 import { FooterMain } from "../components/FooterMain";
 import { calc } from "antd/es/theme/internal";
 
+
 export function LayoutMain() {
   const { state } = useNavigation();
 

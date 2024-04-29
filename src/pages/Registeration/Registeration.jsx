@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import { ThreeCircles } from 'react-loader-spinner'
 import { useState } from 'react'
+
 export default function Registeration() {
 
     const [errorMeg, setErorrMsg] = useState(null);
@@ -59,6 +60,7 @@ export default function Registeration() {
 
     })
     return <div className="">
+        
         <div className={SignUp.section}>
             {errorMeg ? <div className={SignUp.alert + ' text-red-200 shadow-inner rounded p-3 bg-red-300 mt-2 text-center'}>{errorMeg}</div> : ""}
             {successMsg ? <div className={SignUp.alert + ' text-red-200 shadow-inner rounded p-3 bg-green-300 mt-2 text-center'}>{successMsg}</div> : ""}

@@ -11,6 +11,7 @@ import VerifyEmail from './pages/VerifyEmail/VerifyEmail';
 import { LogIn } from "./pages/Log_in/LogIn";
 import ForgetPassword from './pages/ForgetPassword/ForgetPassword';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
+import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +24,11 @@ export const router = createBrowserRouter([
         ...HomeFunc,
       },
 
-      { path: "/MyProjects", element: <MyProjects /> },
+      {
+        path: "/MyProjects", element: <ProtectedRoute>
+          <MyProjects />
+        </ProtectedRoute>
+      },
       { path: "/LogIn", element: <LogIn /> },
       { path: "/Registeration", element: <Registeration /> },
       { path: "/VerifyEmail", element: <VerifyEmail /> },

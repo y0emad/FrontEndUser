@@ -348,16 +348,20 @@ export default function ModalMyPro(order, { state }) {
               />
             ) : (
               <div className="block space-y-3 gap-2.5 mt-9 ">
-                {order.adminMessages?.map((msg, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700"
-                  >
-                    <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
-                      {msg}
-                    </p>
-                  </div>
-                ))}
+                {order.adminMessages.length > 0 ? (
+                  order.adminMessages.map((msg, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700"
+                    >
+                      <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
+                        {msg}
+                      </p>
+                    </div>
+                  ))
+                ) : (
+                  <p className=" font-bold text-xl">No Messages</p>
+                )}
               </div>
             )}
           </Modal>

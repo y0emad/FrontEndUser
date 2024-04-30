@@ -2,20 +2,34 @@ import { useTranslation } from "react-i18next";
 import ModalMyPro from "../../components/ModalMyPro";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { ssrExportAllKey } from "vite/runtime";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import ScrollToTop from "react-scroll-to-top";
+import { UpSquareOutlined } from "@ant-design/icons";
 function MyProjects() {
   const [t, i18n] = useTranslation("global");
   const [lang, setLang] = useLocalStorage("lang", "ar");
   const my_projects = useLoaderData();
+  const state = useNavigation();
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);
   return (
     <div>
-      {" "}
+      <ScrollToTop
+        smooth
+        top={400}
+        style={{
+          bottom: "16px",
+          backgroundColor: "#000915",
+          width: "21px",
+          height: "21px",
+        }}
+        component={
+          <UpSquareOutlined className=" text-gray-200 text-2xl  hover:text-[#7f6727]" />
+        }
+      />{" "}
       <section className="py-24 relative">
         <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
           <h2 className="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-gray-200">
@@ -38,7 +52,7 @@ function MyProjects() {
             </p>
           </div>
           {my_projects.data.map((order) => (
-            <ModalMyPro key={order._id} {...order} />
+            <ModalMyPro key={order._id} {...order} state={state} />
           ))}
         </div>
       </section>

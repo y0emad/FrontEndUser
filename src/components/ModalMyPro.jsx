@@ -1,50 +1,59 @@
-import { Modal } from "antd";
+import { Modal, Spin } from "antd";
 import { useEffect, useState } from "react";
 import { Steps } from "antd";
 
 import { useTranslation } from "react-i18next";
 import useLocalStorage from "../hooks/useLocalStorage";
-export default function ModalMyPro(order) {
+import {
+  CheckCircleFilled,
+  ClockCircleFilled,
+  CloseCircleFilled,
+  LoadingOutlined,
+} from "@ant-design/icons";
+export default function ModalMyPro(order, { state }) {
   const [t, i18n] = useTranslation("global");
   const [lang, setLang] = useLocalStorage("lang", "ar");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStatusOpen, setIsStatusOpen] = useState(false);
   const [isMsgOpen, setIsMsgOpen] = useState(false);
+
+  const [invoiceMsg, setInvoiceMsg] = useState("");
+  const [invoice, setInvoice] = useState(null);
+  const [loading, setloading] = useState(false);
+
   const token = localStorage.getItem("tkn");
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);
-
-  // const [invoice, setInvoice] = useState([]);
-  // const [invNotFound, setinvNotFound] = useState("");
-  // useEffect(() => {
-  //   const abortController = new AbortController();
-  //   const signal = abortController.signal;
-  //   fetch(`http://localhost:4000/orders/${order._id}/invoice`, {
-  //     signal,
-  //     headers: { authorization: `Bearer ${token}` },
-  //   })
-  //     .then((res) => {
-  //       if (res.status === 404) {
-  //         throw new Error("Invoice not found");
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log("invoice", data);
-  //       // setInvoice(data);
-  //     })
-  //     .catch((error) => {
-  //       if (error.name === "AbortError") {
-  //       } else {
-  //         setinvNotFound(error);
-  //         console.log("error", error);
-  //       }
-  //     });
-  //   return () => {
-  //     abortController.abort();
-  //   };
-  // }, []);
+  useEffect(() => {
+    setloading(true);
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+    fetch(`http://localhost:4000/orders/${order._id}/invoice`, {
+      signal,
+      headers: { authorization: `Bearer ${token}` },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Error fetching invoice");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setInvoiceMsg(data.message);
+        setInvoice(data);
+      })
+      .finally(() => setloading(false))
+      .catch((error) => {
+        if (error.name === "AbortError") {
+        } else {
+          setinvNotFound(error);
+        }
+      });
+    return () => {
+      abortController.abort();
+    };
+  }, [order._id, token]);
 
   const showModal = (key) => {
     return key === "Details"
@@ -102,68 +111,83 @@ export default function ModalMyPro(order) {
             footer={null}
             onCancel={() => handleCancel("Details")}
           >
-            <div className="flex flex-wrap gap-5 mt-8  items-center">
-              <div className=" w-full flex flex-wrap gap-2 items-center ">
-                {" "}
-                <h1 className="text-2xl font-medium text-[#ad8d36]">
-                  {t("ModalMyPro.Name")} :
-                </h1>{" "}
-                <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
-                  {order.product.product_name}
-                </h1>
-              </div>
-              <div className=" w-full flex flex-wrap gap-2 items-center ">
-                {" "}
-                <h1 className="text-2xl font-medium text-[#ad8d36]">
-                  Order Id :
-                </h1>{" "}
-                <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
-                  {order._id}
-                </h1>
-              </div>
-              <div className=" w-full flex flex-wrap gap-2 items-center">
-                {" "}
-                <h1 className="text-2xl font-medium text-[#ad8d36]  ">
-                  {t("ModalMyPro.Quantity")} :
-                </h1>{" "}
-                <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
-                  {order.product.quantity}
-                </h1>
-              </div>
-              <div className=" w-full flex flex-wrap gap-2 items-start ">
-                {" "}
-                <h1 className="text-2xl font-medium text-[#ad8d36] ">
-                  {t("ModalMyPro.File_Name")} :
-                </h1>{" "}
-                <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
-                  {order.product.file}
-                </h1>
-              </div>
-              <h1 className="text-2xl font-medium text-gray-200 w-full my-4 ">
-                Required Data
-              </h1>{" "}
-              {order.product.data?.map((field) => (
-                <div key={field._id} className=" space-y-3">
-                  <div className="w-full flex flex-wrap gap-12 items-center">
-                    <div className=" flex items-center gap-2">
-                      <h1 className="text-2xl font-medium text-[#ad8d36]">
-                        field name :
-                      </h1>{" "}
-                      <h1 className="text-xl text-gray-200   min-w-[80px] max-w-[367px]">
-                        {field.field_name}
-                      </h1>
-                    </div>
-                    <div className=" flex items-center gap-2">
-                      <h1 className="text-2xl font-medium text-[#ad8d36]">
-                        value :
-                      </h1>{" "}
-                      <h1 className="text-xl text-gray-200">{field.value}</h1>
-                    </div>
-                  </div>
-                  <div className="w-full flex flex-wrap gap-2 items-center"></div>
+            {state === "loading" ? (
+              <Spin
+                size="large"
+                indicator={
+                  <LoadingOutlined
+                    style={{
+                      fontSize: 24,
+                      color: "#e5e7eb",
+                    }}
+                    spin
+                  />
+                }
+              />
+            ) : (
+              <div className="flex flex-wrap gap-5 mt-8  items-center">
+                <div className=" w-full flex flex-wrap gap-2 items-center ">
+                  {" "}
+                  <h1 className="text-2xl font-medium text-[#ad8d36]">
+                    {t("ModalMyPro.Name")} :
+                  </h1>{" "}
+                  <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
+                    {order.product.product_name}
+                  </h1>
                 </div>
-              ))}
-            </div>
+                <div className=" w-full flex flex-wrap gap-2 items-center ">
+                  {" "}
+                  <h1 className="text-2xl font-medium text-[#ad8d36]">
+                    Order Id :
+                  </h1>{" "}
+                  <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
+                    {order._id}
+                  </h1>
+                </div>
+                <div className=" w-full flex flex-wrap gap-2 items-center">
+                  {" "}
+                  <h1 className="text-2xl font-medium text-[#ad8d36]  ">
+                    {t("ModalMyPro.Quantity")} :
+                  </h1>{" "}
+                  <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
+                    {order.product.quantity}
+                  </h1>
+                </div>
+                <div className=" w-full flex flex-wrap gap-2 items-start ">
+                  {" "}
+                  <h1 className="text-2xl font-medium text-[#ad8d36] ">
+                    {t("ModalMyPro.File_Name")} :
+                  </h1>{" "}
+                  <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
+                    {order.product.file}
+                  </h1>
+                </div>
+                <h1 className="text-2xl font-medium text-gray-200 w-full my-4 ">
+                  Required Data
+                </h1>{" "}
+                {order.product.data?.map((field) => (
+                  <div key={field._id} className=" space-y-3">
+                    <div className="w-full flex flex-wrap gap-12 items-center">
+                      <div className=" flex items-center gap-2">
+                        <h1 className="text-2xl font-medium text-[#ad8d36]">
+                          field name :
+                        </h1>{" "}
+                        <h1 className="text-xl text-gray-200   min-w-[80px] max-w-[367px]">
+                          {field.field_name}
+                        </h1>
+                      </div>
+                      <div className=" flex items-center gap-2">
+                        <h1 className="text-2xl font-medium text-[#ad8d36]">
+                          value :
+                        </h1>{" "}
+                        <h1 className="text-xl text-gray-200">{field.value}</h1>
+                      </div>
+                    </div>
+                    <div className="w-full flex flex-wrap gap-2 items-center"></div>
+                  </div>
+                ))}
+              </div>
+            )}
           </Modal>
 
           <h6 className="text-gray-200 font-manrope  font-bold text-2xl leading-9 w-full max-w-[176px] text-center">
@@ -197,36 +221,74 @@ export default function ModalMyPro(order) {
             footer={null}
             onCancel={() => handleCancel("Status")}
           >
-            {/* <h1 className=" mt-9 text-2xl font-bold items-center text-nowrap gap-2">
-              <span className=" text-[#b99638]">
-                {" "}
-                {t("ModalMyPro.StatusOfAccept")} :
-              </span>{" "}
-              <span className="  sm:inline-flex  flex flex-wrap  items-center gap-2">
-                <h2> {t("ModalMyPro.Waiting")} </h2>
-                <ClockCircleFilled className=" text-lg text-[#b99638]" />
-              </span>
-            </h1>
-            <h1 className=" mt-9 text-2xl font-bold items-center text-nowrap gap-2">
-              <span className=" text-[#b99638]">
-                {" "}
-                {t("ModalMyPro.StatusOfAccept")} :
-              </span>{" "}
-              <span className="  sm:inline-flex  flex flex-wrap  items-center gap-2">
-                <h2> {t("ModalMyPro.Deny")} </h2>
-                <CloseCircleFilled className=" text-lg text-red-500" />
-              </span>
-            </h1>
-            <h1 className=" mt-9 text-2xl font-bold items-center text-nowrap gap-2">
-              <span className=" text-[#b99638]">
-                {" "}
-                {t("ModalMyPro.StatusOfAccept")} :
-              </span>{" "}
-              <span className="  sm:inline-flex  flex flex-wrap  items-center gap-2">
-                <h2> {t("ModalMyPro.Accept")} </h2>
-                <CheckCircleFilled className=" text-lg text-green-500" />
-              </span>
-            </h1> */}
+            {loading ? (
+              <Spin
+                size="large"
+                indicator={
+                  <LoadingOutlined
+                    style={{
+                      fontSize: 24,
+                      color: "#e5e7eb",
+                    }}
+                    spin
+                  />
+                }
+              />
+            ) : invoiceMsg === "No invoice found for the order." ? (
+              <h1 className="mt-9 text-2xl font-bold items-center text-nowrap gap-2">
+                <span className="text-[#b99638]">
+                  {t("ModalMyPro.StatusOfAccept")} :
+                </span>{" "}
+                <span className="sm:inline-flex flex flex-wrap items-center gap-2">
+                  <h2> {t("ModalMyPro.Waiting")} </h2>
+                  <ClockCircleFilled className="text-lg text-[#b99638]" />
+                </span>
+              </h1>
+            ) : (
+              <>
+                {order.accepted ? (
+                  <h1 className="mt-9 text-2xl font-bold items-center text-nowrap gap-2">
+                    <span className="text-[#b99638]">
+                      {t("ModalMyPro.StatusOfAccept")} :
+                    </span>{" "}
+                    <span className="sm:inline-flex flex flex-wrap items-center gap-2">
+                      <h2> {t("ModalMyPro.Accept")} </h2>
+                      <CheckCircleFilled className="text-lg text-green-500" />
+                    </span>
+                    <div className="flex flex-wrap gap-5 mt-8  items-center">
+                      <div className=" w-full flex flex-wrap gap-2 items-center ">
+                        {" "}
+                        <h1 className="text-2xl font-medium text-[#ad8d36]">
+                          Total Cost :
+                        </h1>{" "}
+                        <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
+                          {invoice?.totalCost}
+                        </h1>
+                      </div>
+                      <div className=" w-full flex flex-wrap gap-2 items-center ">
+                        {" "}
+                        <h1 className="text-2xl font-medium text-[#ad8d36]">
+                          Payment Code :
+                        </h1>{" "}
+                        <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
+                          {invoice?.paymentCode}
+                        </h1>
+                      </div>
+                    </div>
+                  </h1>
+                ) : (
+                  <h1 className="mt-9 text-2xl font-bold items-center text-nowrap gap-2">
+                    <span className="text-[#b99638]">
+                      {t("ModalMyPro.StatusOfAccept")} :
+                    </span>{" "}
+                    <span className="sm:inline-flex flex flex-wrap items-center gap-2">
+                      <h2> {t("ModalMyPro.Deny")} </h2>
+                      <CloseCircleFilled className="text-lg text-red-500" />
+                    </span>
+                  </h1>
+                )}
+              </>
+            )}
             <Steps
               className=" mt-10 "
               current={order.status}
@@ -271,26 +333,33 @@ export default function ModalMyPro(order) {
             footer={null}
             onCancel={() => handleCancel("Messages")}
           >
-            <div className="block space-y-3 gap-2.5 mt-9 ">
-              <div className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-                <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
-                  That's awesome. I think our users will really appreciate the
-                  improvements.
-                </p>
+            {state === "loading" ? (
+              <Spin
+                size="large"
+                indicator={
+                  <LoadingOutlined
+                    style={{
+                      fontSize: 24,
+                      color: "#e5e7eb",
+                    }}
+                    spin
+                  />
+                }
+              />
+            ) : (
+              <div className="block space-y-3 gap-2.5 mt-9 ">
+                {order.adminMessages?.map((msg, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700"
+                  >
+                    <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
+                      {msg}
+                    </p>
+                  </div>
+                ))}
               </div>
-              <div className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-                <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
-                  That's awesome. I think our users will really appreciate the
-                  improvements.
-                </p>
-              </div>
-              <div className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-                <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
-                  That's awesome. I think our users will really appreciate the
-                  improvements.
-                </p>
-              </div>
-            </div>
+            )}
           </Modal>
           <></>
         </div>

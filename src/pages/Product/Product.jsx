@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import imgBooks from "../../images/Boos.jpg";
-import { Modal } from "antd";
+import { Modal, Spin } from "antd";
 import "./product.css";
 import { jwtDecode } from "jwt-decode";
 import {
@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useContext } from "react";
 import { authContext } from "./../../Context/authentication";
+import { LoadingOutlined } from "@ant-design/icons";
 
 function Product() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -143,11 +144,28 @@ function Product() {
                   </div>
                   <button
                     disabled={state === "submitting" ? true : false}
-                    className="bg-[#7f6727] sm:ltr:mr-2 sm:rtl:ml-2 text-[#000915] border-2 hover:border-gray-200 border-[#7f6727]  hover:!bg-gray-200 hover:!text-[#000915]    transition-colors duration-300  focus:outline-none mb-2 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+                    className={`bg-[#7f6727] sm:ltr:mr-2 sm:rtl:ml-2 text-[#000915] border-2 ${
+                      state === "submitting"
+                        ? "cursor-not-allowed hover:!bg-[#7f6727] hover:!text-[#000915] hover:!border-[#7f6727]"
+                        : "cursor-pointer"
+                    } hover:border-gray-200 border-[#7f6727]  hover:!bg-gray-200 hover:!text-[#000915]    transition-colors duration-300  focus:outline-none mb-2 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center `}
                   >
-                    {state === "submitting"
-                      ? t("Product.Sending")
-                      : t("Product.Send")}
+                    {state === "submitting" ? (
+                      <Spin
+                        size="large"
+                        indicator={
+                          <LoadingOutlined
+                            style={{
+                              fontSize: 19,
+                              color: "#000915",
+                            }}
+                            spin
+                          />
+                        }
+                      />
+                    ) : (
+                      t("Product.Send")
+                    )}
                   </button>
                   <button
                     onClick={handleCancel}
@@ -208,39 +226,31 @@ const action = async ({ request, params, signal }) => {
   const token = localStorage.getItem("tkn");
   const tokenDecode = jwtDecode(token);
   const formBody = new FormData();
-  const updatedData = products.data.requiredData.map((input) => {
+  const updatedData = products.data.requiredData.map((input, i = 0) => {
+    formBody.set(`product[data][${i}][field_name]`, `${input.name}`);
+    formBody.set(`product[data][${i}][value]`, `${formData.get(input.name)}`);
+    i += 1;
     return {
       field_name: input.name,
       value: formData.get(input.name),
     };
   });
 
-  console.log("updatedData", updatedData);
-  console.log("file_input", file_input);
-  console.log("Quantity", Quantity);
-  console.log(" product_id", product_id);
-  console.log("userId", tokenDecode.userId);
-  console.log("Token", token);
-  formBody.set("file_input", file_input);
+  formBody.set("product[File]", file_input);
+  formBody.set("product[quantity]", Quantity);
+  formBody.set("user_id", tokenDecode.userId);
+
+  formBody.set("product[product_id]", product_id);
+
   const res = await fetch(`http://localhost:4000/orders/create`, {
     method: "post",
     signal: request.signal,
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      user_id: tokenDecode.userId,
-      product: {
-        product_id: product_id,
-        quantity: Quantity,
-        File: formBody,
-        data: updatedData,
-      },
-    }),
+    body: formBody,
   });
 
-  console.log("stat", res);
   return redirect("/MyProjects");
 };
 

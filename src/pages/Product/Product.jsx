@@ -59,7 +59,11 @@ function Product() {
                 open={isModalOpen}
                 onCancel={handleCancel}
               >
-                <Form className=" mt-5" method="post">
+                <Form
+                  className=" mt-5"
+                  method="post"
+                  encType="multipart/form-data"
+                >
                   <div className="grid gap-6 mb-6 grid-cols-1">
                     {product.data.requiredData.map((input) =>
                       input.hasChoices ? (
@@ -203,10 +207,9 @@ const action = async ({ request, params, signal }) => {
   const Quantity = formData.get("Quantity");
   const token = localStorage.getItem("tkn");
   const tokenDecode = jwtDecode(token);
-
+  const formBody = new FormData();
   const updatedData = products.data.requiredData.map((input) => {
     return {
-      id: input._id,
       field_name: input.name,
       value: formData.get(input.name),
     };
@@ -218,7 +221,7 @@ const action = async ({ request, params, signal }) => {
   console.log(" product_id", product_id);
   console.log("userId", tokenDecode.userId);
   console.log("Token", token);
-
+  formBody.set("file_input", file_input);
   const res = await fetch(`http://localhost:4000/orders/create`, {
     method: "post",
     signal: request.signal,
@@ -231,7 +234,7 @@ const action = async ({ request, params, signal }) => {
       product: {
         product_id: product_id,
         quantity: Quantity,
-        file: file_input,
+        File: formBody,
         data: updatedData,
       },
     }),

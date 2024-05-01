@@ -11,7 +11,7 @@ function MyProjects() {
   const [t, i18n] = useTranslation("global");
   const [lang, setLang] = useLocalStorage("lang", "ar");
   const my_projects = useLoaderData();
-  const state = useNavigation();
+  const { state } = useNavigation();
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);

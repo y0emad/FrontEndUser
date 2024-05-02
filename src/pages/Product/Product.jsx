@@ -18,6 +18,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { useContext } from "react";
 import { authContext } from "./../../Context/authentication";
 import { LoadingOutlined } from "@ant-design/icons";
+import toast from "react-hot-toast";
 
 function Product() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,6 +40,13 @@ function Product() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  function errorMsg() {
+    toast.error("YOU MUST LOGIN FIRST😒 ", {
+      duration:2000,
+      position:"top-center"
+    }
+    )
+  }
   return (
     <div className="grid lg:grid-cols-2 grid-cols-1 text-gray-200  lg:mt-24 mt-5 mb-16">
       <div className=" p-10 mb-10 lg:mb-0">
@@ -144,11 +152,10 @@ function Product() {
                   </div>
                   <button
                     disabled={state === "submitting" ? true : false}
-                    className={`bg-[#7f6727] sm:ltr:mr-2 sm:rtl:ml-2 text-[#000915] border-2 ${
-                      state === "submitting"
+                    className={`bg-[#7f6727] sm:ltr:mr-2 sm:rtl:ml-2 text-[#000915] border-2 ${state === "submitting"
                         ? "cursor-not-allowed hover:!bg-[#7f6727] hover:!text-[#000915] hover:!border-[#7f6727]"
                         : "cursor-pointer"
-                    } hover:border-gray-200 border-[#7f6727]  hover:!bg-gray-200 hover:!text-[#000915]    transition-colors duration-300  focus:outline-none mb-2 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center `}
+                      } hover:border-gray-200 border-[#7f6727]  hover:!bg-gray-200 hover:!text-[#000915]    transition-colors duration-300  focus:outline-none mb-2 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center `}
                   >
                     {state === "submitting" ? (
                       <Spin
@@ -177,11 +184,11 @@ function Product() {
               </Modal>{" "}
             </>
           ) : (
-            <Link to={"/LogIn"}>
+            <Link to={"/LogIn"} onClick={errorMsg} >
               <button
                 type="button"
                 className="bg-[#7f6727] text-[#000915] text-lg font-medium rounded-2xl py-3 px-6 hover:bg-gray-200 transition-colors duration-300"
-                onClick={showModal}
+                
               >
                 {t("Product.Make_Order")}
               </button>

@@ -7,6 +7,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { ThreeCircles } from "react-loader-spinner";
 import { useContext, useState } from "react";
 import { authContext } from "../../Context/authentication";
+import { jwtDecode } from "jwt-decode";
 export function LogIn() {
   const [errorMeg, setErorrMsg] = useState(null);
   const [successMsg, setSuccessMsg] = useState();
@@ -24,14 +25,18 @@ export function LogIn() {
       // console.log(data);
       //http://localhost:4000/auth/login
       // https://printing-sys-fojo.vercel.app/auth/register
-
-      if (data.message === "Login successful.") {
+      const res =jwtDecode(data.token);
+      console.log(res.role);
+      if (res.role === "user") {
         localStorage.setItem("tkn", data.token);
         setToken(data.token);
-        setSuccessMsg(data.message);
+        setSuccessMsg("Login successfully.");
         setTimeout(function () {
           navigate("/");
         }, 3000);
+      }
+      if(res.role === "admin"){
+        setErorrMsg("YOU ARE NOT AUTHORIZED");
       }
     } catch (error) {
       console.log(error);

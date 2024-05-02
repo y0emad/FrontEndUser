@@ -184,11 +184,11 @@ function Product() {
               </Modal>{" "}
             </>
           ) : (
-            <Link to={"/LogIn"} onClick={errorMsg} >
+            <Link to={"/LogIn"}  >
               <button
                 type="button"
                 className="bg-[#7f6727] text-[#000915] text-lg font-medium rounded-2xl py-3 px-6 hover:bg-gray-200 transition-colors duration-300"
-                
+                onClick={errorMsg}
               >
                 {t("Product.Make_Order")}
               </button>

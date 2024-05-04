@@ -106,7 +106,7 @@ function Home() {
 
 const loader = async ({ request: { signal } }) => {
   const all_products = await fetch(
-    "https://printing-sys-fojo.vercel.app/products",
+    "http://localhost:4000/products/GetShownProducts",
     {
       signal,
     }

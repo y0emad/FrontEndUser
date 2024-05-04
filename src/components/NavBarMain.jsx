@@ -34,7 +34,7 @@ export function NavBarMain() {
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
-    fetch("https://printing-sys-fojo.vercel.app/products", { signal })
+    fetch("http://localhost:4000/products/GetShownProducts", { signal })
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");

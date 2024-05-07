@@ -3,7 +3,7 @@ import "../styles.css";
 import logo from "../images/logo.png";
 import { Dropdown, Select } from "antd";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   GlobalOutlined,
   LoginOutlined,
@@ -42,7 +42,9 @@ export function NavBarMain() {
         return res.json();
       })
       .then((data) => {
-        setProducts(data.data);
+        data.message === "No Products found"
+          ? setProducts([])
+          : setProducts(data.data);
       })
       .catch((error) => {
         if (error.name === "AbortError") {
@@ -87,7 +89,11 @@ export function NavBarMain() {
         "grid grid-cols-3 h-16 bg-[#000915] z-50 items-center mx-auto fixed top-0 w-full"
       }
     >
-      <div className="nav-links me-auto md:m-3 md:static  md:min-h-fit md:items-center absolute bg-[#000915] min-h-[20vh] bottom-[240%] grid  left-0 md:w-auto md:py-0  w-full  text-gray-200 fontMed ">
+      <div
+        className={`nav-links me-auto md:m-3 md:static  md:min-h-fit md:items-center absolute bg-[#000915] ${
+          token ? "min-h-[20vh]" : "min-h-[12vh]"
+        } bottom-[240%] grid  left-0 md:w-auto md:py-0  w-full  text-gray-200 fontMed `}
+      >
         <ul className="flex md:flex-row flex-col md:justify-start  justify-center items-end gap-5 mr-5 ml-5   md:items-center ">
           <li>
             <Dropdown

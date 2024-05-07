@@ -64,40 +64,46 @@ function Home() {
           {t("Home.all_products")}
         </h2>
         <div className=" flex justify-evenly  flex-wrap mr-5 ml-5 gap-10 ">
-          {all_products.data.map((product) => (
-            <Card
-              key={product._id}
-              hoverable
-              style={{
-                width: 215,
-                height: 280,
-                padding: 3,
-              }}
-              className=" bg-transparent  border-0 "
-              cover={
-                <Link to={`/Product/${product._id}`}>
-                  <img
-                    className="rounded-full w-[210px] h-[200px]"
-                    style={{ borderRadius: 100 }}
-                    alt={`${product.name}`}
-                    src={`${product.image}`}
-                  />
-                </Link>
-              }
-            >
-              <Meta
-                className=" text-center "
-                title={
-                  <Link
-                    to={`/Product/${product._id}`}
-                    className=" text-gray-200 hover:text-[#7f6727] text-lg"
-                  >
-                    {product.name}
+          {all_products.message === "No Products found" ? (
+            <div className=" text-gray-200 text-2xl font-medium ">
+              {all_products.message}
+            </div>
+          ) : (
+            all_products.data.map((product) => (
+              <Card
+                key={product._id}
+                hoverable
+                style={{
+                  width: 215,
+                  height: 280,
+                  padding: 3,
+                }}
+                className=" bg-transparent  border-0 "
+                cover={
+                  <Link to={`/Product/${product._id}`}>
+                    <img
+                      className="rounded-full w-[210px] h-[200px]"
+                      style={{ borderRadius: 100 }}
+                      alt={`${product.name}`}
+                      src={`${product.image}`}
+                    />
                   </Link>
                 }
-              />
-            </Card>
-          ))}{" "}
+              >
+                <Meta
+                  className=" text-center "
+                  title={
+                    <Link
+                      to={`/Product/${product._id}`}
+                      className=" text-gray-200 hover:text-[#7f6727] text-lg"
+                    >
+                      {product.name}
+                    </Link>
+                  }
+                />
+              </Card>
+            ))
+          )}
         </div>
       </div>
     </div>

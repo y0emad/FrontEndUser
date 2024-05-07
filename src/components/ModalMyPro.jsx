@@ -10,6 +10,7 @@ import {
   CloseCircleFilled,
   LoadingOutlined,
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 export default function ModalMyPro(order, { state }) {
   const [t, i18n] = useTranslation("global");
   const [lang, setLang] = useLocalStorage("lang", "ar");
@@ -126,30 +127,30 @@ export default function ModalMyPro(order, { state }) {
               />
             ) : (
               <div className="flex flex-wrap gap-5 mt-8  items-center">
-                <div className=" w-full flex flex-wrap gap-2 items-center ">
+                <div className=" w-full flex flex-wrap gap-2 items-start ">
                   {" "}
                   <h1 className="text-2xl font-medium text-[#ad8d36]">
                     {t("ModalMyPro.Name")} :
                   </h1>{" "}
-                  <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
+                  <h1 className=" text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
                     {order.product.product_name}
                   </h1>
                 </div>
-                <div className=" w-full flex flex-wrap gap-2 items-center ">
+                <div className=" w-full flex flex-wrap gap-2 items-start ">
                   {" "}
                   <h1 className="text-2xl font-medium text-[#ad8d36]">
                     Order Id :
                   </h1>{" "}
-                  <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
+                  <h1 className=" text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
                     {order._id}
                   </h1>
                 </div>
-                <div className=" w-full flex flex-wrap gap-2 items-center">
+                <div className=" w-full flex flex-wrap gap-2 items-start">
                   {" "}
                   <h1 className="text-2xl font-medium text-[#ad8d36]  ">
                     {t("ModalMyPro.Quantity")} :
                   </h1>{" "}
-                  <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
+                  <h1 className=" text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
                     {order.product.quantity}
                   </h1>
                 </div>
@@ -158,8 +159,8 @@ export default function ModalMyPro(order, { state }) {
                   <h1 className="text-2xl font-medium text-[#ad8d36] ">
                     {t("ModalMyPro.File_Name")} :
                   </h1>{" "}
-                  <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
-                    {order.product.file}
+                  <h1 className=" text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
+                    <Link to={order.product.file}>{order.product.file}</Link>
                   </h1>
                 </div>
                 <h1 className="text-2xl font-medium text-gray-200 w-full my-4 ">
@@ -167,20 +168,14 @@ export default function ModalMyPro(order, { state }) {
                 </h1>{" "}
                 {order.product.data?.map((field) => (
                   <div key={field._id} className=" space-y-3">
-                    <div className="w-full flex flex-wrap gap-12 items-center">
+                    <div className="w-full flex flex-wrap gap-12 items-start">
                       <div className=" flex items-center gap-2">
                         <h1 className="text-2xl font-medium text-[#ad8d36]">
-                          field name :
+                          {field.field_name} :
                         </h1>{" "}
-                        <h1 className="text-xl text-gray-200   min-w-[80px] max-w-[367px]">
-                          {field.field_name}
+                        <h1 className="text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
+                          {field.value}
                         </h1>
-                      </div>
-                      <div className=" flex items-center gap-2">
-                        <h1 className="text-2xl font-medium text-[#ad8d36]">
-                          value :
-                        </h1>{" "}
-                        <h1 className="text-xl text-gray-200">{field.value}</h1>
                       </div>
                     </div>
                     <div className="w-full flex flex-wrap gap-2 items-center"></div>
@@ -261,7 +256,7 @@ export default function ModalMyPro(order, { state }) {
                         <h1 className="text-2xl font-medium text-[#ad8d36]">
                           Total Cost :
                         </h1>{" "}
-                        <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
+                        <h1 className=" text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
                           {invoice?.totalCost}
                         </h1>
                       </div>
@@ -270,7 +265,7 @@ export default function ModalMyPro(order, { state }) {
                         <h1 className="text-2xl font-medium text-[#ad8d36]">
                           Payment Code :
                         </h1>{" "}
-                        <h1 className=" text-xl text-gray-200 min-w-[80px] max-w-[342px]">
+                        <h1 className=" text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
                           {invoice?.paymentCode}
                         </h1>
                       </div>

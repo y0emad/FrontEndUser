@@ -30,32 +30,38 @@ function MyProjects() {
           <UpSquareOutlined className=" text-gray-200 text-2xl  hover:text-[#7f6727]" />
         }
       />{" "}
-      <section className="py-24 relative">
-        <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
-          <h2 className="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-gray-200">
-            {t("ModalMyPro.My_Projects")}
-          </h2>
-          <div className="hidden lg:grid grid-cols-2 py-6">
-            <div className="font-normal text-xl leading-8 text-gray-200">
-              {t("ModalMyPro.Product")}
-            </div>
-            <p className="font-normal text-xl leading-8 text-gray-200 justify-evenly flex items-center  ">
-              <span className="w-full max-w-[176px] text-center">
-                {t("ModalMyPro.Details")}
-              </span>
-              <span className="w-full max-w-[176px] text-center">
-                {t("ModalMyPro.Status")}
-              </span>
-              <span className="w-full max-w-[176px] text-center ">
-                Messages{" "}
-              </span>
-            </p>
-          </div>
-          {my_projects.data.map((order) => (
-            <ModalMyPro key={order._id} {...order} state={state} />
-          ))}
+      {my_projects.message === "No orders found for this user." ? (
+        <div className=" title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-gray-200 pt-10">
+          {my_projects.message}
         </div>
-      </section>
+      ) : (
+        <section className="py-24 relative">
+          <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
+            <h2 className="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-gray-200">
+              {t("ModalMyPro.My_Projects")}
+            </h2>
+            <div className="hidden lg:grid grid-cols-2 py-6">
+              <div className="font-normal text-xl leading-8 text-gray-200">
+                {t("ModalMyPro.Product")}
+              </div>
+              <p className="font-normal text-xl leading-8 text-gray-200 justify-evenly flex items-center  ">
+                <span className="w-full max-w-[176px] text-center">
+                  {t("ModalMyPro.Details")}
+                </span>
+                <span className="w-full max-w-[176px] text-center">
+                  {t("ModalMyPro.Status")}
+                </span>
+                <span className="w-full max-w-[176px] text-center ">
+                  Messages{" "}
+                </span>
+              </p>
+            </div>
+            {my_projects.data.map((order) => (
+              <ModalMyPro key={order._id} {...order} state={state} />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

@@ -78,6 +78,16 @@ export default function ModalMyPro(order, { state }) {
       : setIsMsgOpen(false);
   };
 
+  const getDateOnly = (isoString) => {
+    const date = new Date(isoString);
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(date.getUTCDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const dateOnly = getDateOnly(invoice?.deliveryTime);
+
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 min-[550px]:gap-7 border-t border-[#7f6727] py-6">
@@ -267,6 +277,15 @@ export default function ModalMyPro(order, { state }) {
                         </h1>{" "}
                         <h1 className=" text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
                           {invoice?.paymentCode}
+                        </h1>
+                      </div>
+                      <div className=" w-full flex flex-wrap gap-2 items-center ">
+                        {" "}
+                        <h1 className="text-2xl font-medium text-[#ad8d36]">
+                          Delivery Time :
+                        </h1>{" "}
+                        <h1 className=" text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
+                          {dateOnly}
                         </h1>
                       </div>
                     </div>

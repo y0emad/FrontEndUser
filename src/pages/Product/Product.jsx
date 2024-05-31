@@ -7,11 +7,8 @@ import {
   useLoaderData,
   Form,
   useNavigation,
-  useActionData,
   redirect,
-  Navigate,
   Link,
-  json,
 } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -40,6 +37,7 @@ function Product() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   function errorMsg() {
     toast.error("YOU MUST LOGIN FIRST😒 ", {
       duration: 2000,
@@ -144,8 +142,24 @@ function Product() {
                         name="file_input"
                         required
                         type="file"
-                        accept="application/pdf , application/msword , application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        accept="application/pdf ,  application/msword,  application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                         className="w-full text-gray-500 font-medium text-base bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4  file:bg-gray-800 file:hover:bg-gray-700 file:text-gray-200 rounded"
+                      />
+                    </div>
+                    <div className="mb-6">
+                      <label
+                        htmlFor="Notes"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200"
+                      >
+                        Notes
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        name="Notes"
+                        id="Notes"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Notes"
                       />
                     </div>
                   </div>
@@ -216,7 +230,7 @@ function Product() {
 
 const loader = async ({ request: { signal }, params }) => {
   const product = await fetch(
-    `https://printing-sys-fojo.vercel.app/products/${params.product_id}`,
+    `http://localhost:4000/products/${params.product_id}`,
     signal
   ).then((res) => res.json());
   return product;
@@ -224,12 +238,14 @@ const loader = async ({ request: { signal }, params }) => {
 const action = async ({ request, params, signal }) => {
   const formData = await request.formData();
   const products = await fetch(
-    `https://printing-sys-fojo.vercel.app/products/${params.product_id}`,
+    `http://localhost:4000/products/${params.product_id}`,
     { signal }
   ).then((res) => res.json());
   const product_id = params.product_id;
   const file_input = formData.get("file_input");
   const Quantity = formData.get("Quantity");
+  const Notes = formData.get("Notes");
+
   const token = localStorage.getItem("tkn");
   const tokenDecode = jwtDecode(token);
   const formBody = new FormData();
@@ -245,6 +261,7 @@ const action = async ({ request, params, signal }) => {
 
   formBody.set("product[File]", file_input);
   formBody.set("product[quantity]", Quantity);
+  formBody.set("product[notes]", Notes);
   formBody.set("user_id", tokenDecode.userId);
 
   formBody.set("product[product_id]", product_id);

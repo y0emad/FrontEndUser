@@ -1,7 +1,7 @@
 import axios from "axios";
 import Verify from "./verifyEmail.module.css";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ThreeCircles } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -54,86 +54,39 @@ export default function VerifyEmail() {
     },
     onSubmit: sendingData,
   });
-  return (
-    <div className={Verify.container}>
-      <div className={Verify.section}>
-        {errorMeg ? (
-          <div
-            className={
-              Verify.alert +
-              " text-red-200 shadow-inner rounded p-3 bg-red-300 mt-2 text-center"
-            }
-          >
-            {errorMeg}
-          </div>
-        ) : (
-          ""
-        )}
-        {successMsg ? (
-          <div
-            className={
-              Verify.alert +
-              " text-red-200 shadow-inner rounded p-3 bg-green-300 mt-2 text-center"
-            }
-          >
-            {successMsg}
-          </div>
-        ) : (
-          ""
-        )}
-        <h2 className={Verify.header}>Verify Email</h2>
-        <form onSubmit={formikObj.handleSubmit}>
-          <input
-            type="text"
-            onChange={formikObj.handleChange}
-            onBlur={formikObj.handleBlur}
-            value={formikObj.values.code}
-            name="code"
-            style={{ fontFamily: " Segoe UI ,fontawesome  " }}
-            className={
-              Verify.input +
-              " mt-5 border w-full text-base px-2 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
-            }
-            placeholder=" &#xf023; Code"
-          />
-          {formikObj.errors.code && formikObj.touched.code ? (
-            <div
-              className={
-                Verify.alert +
-                " text-red-200 shadow-inner rounded p-3 bg-red-300 mt-2 "
-              }
-            >
-              {formikObj.errors.code}
-            </div>
-          ) : (
-            ""
-          )}
+  return <div className={Verify.container}>
+    <div className={Verify.section}>
+      {errorMeg ? <div className={Verify.alert + ' text-red-200 shadow-inner rounded p-3 bg-red-300 mt-2 text-center'}>{errorMeg}</div> : ""}
+      {successMsg ? <div className={Verify.alert + ' text-red-200 shadow-inner rounded p-3 bg-green-300 mt-2 text-center'}>{successMsg}</div> : ""}
+      <h2 className={Verify.header}>Verify Email</h2>
+      <form onSubmit={formikObj.handleSubmit}>
 
-          <div className={Verify.containerbtns}>
-            <button
-              className={Verify.signupbtn}
-              type="submit"
-              disabled={
-                formikObj.isValid === false || formikObj.dirty === false
-              }
-            >
-              {isLoading ? (
-                <ThreeCircles
-                  visible={true}
-                  height="30"
-                  width="60"
-                  color="#fff"
-                  ariaLabel="three-circles-loading"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                />
-              ) : (
-                "Submit"
-              )}
-            </button>
-          </div>
-        </form>
-      </div>
+
+
+
+
+        <input type="text" onChange={formikObj.handleChange} onBlur={formikObj.handleBlur} value={formikObj.values.code} name='code' className={Verify.input + ' mt-5 border w-full text-base ps-8 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 '} placeholder=' Code' />
+        <i className="fa-solid fa-lock relative	 " style={{ color: "#7f6727", bottom: "33px", left: "10px" }}></i>
+        {(formikObj.errors.code && formikObj.touched.code) ? <div className={Verify.alert + ' text-red-200 shadow-inner rounded p-3 bg-red-300  '}>{formikObj.errors.code}</div> : ""}
+
+
+
+        <div className={Verify.containerbtns}>
+          <button className={Verify.signupbtn} type='submit' disabled={formikObj.isValid === false || formikObj.dirty === false}>
+            {isLoading ? <ThreeCircles
+              visible={true}
+              height="30"
+              width="60"
+              color="#fff"
+              ariaLabel="three-circles-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            /> : "Submit"}
+          </button>
+
+        </div>
+      </form>
     </div>
-  );
+  </div>
+
 }

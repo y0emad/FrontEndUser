@@ -66,7 +66,7 @@
     transform: translateY(-50%);
     transform-origin: center;
     transition: background 0.3s linear, width 0.3s linear;
-    
+
 }
 
 .fancy .text {
@@ -79,7 +79,7 @@
     text-transform: uppercase;
     text-decoration: none;
     color: black;
-    
+
 }
 
 .fancy .topKey {
@@ -102,7 +102,7 @@
     transition: width 0.5s ease-out, right 0.3s ease-out;
 }
 
-.fancy .bottomKey2{
+.fancy .bottomKey2 {
     height: 2px;
     width: 0.625rem;
     right: 0.625rem;
@@ -121,7 +121,7 @@
 .fancy:hover::before {
     width: 0.9375rem;
     background: white;
-    
+
 }
 
 .fancy:hover .text {
@@ -138,7 +138,7 @@
 .fancy:hover .bottom-key-2 {
     right: 0;
     width: 0;
-    
+
 }
 
 .containerbtns {
@@ -147,14 +147,17 @@
     justify-content: space-around;
     align-items: center;
 }
-.forget{
+
+.forget {
     text-align: center !important;
 }
-.forgettext{
-    color:  #e2e2e2;
+
+.forgettext {
+    color: #e2e2e2;
     transition: 0.3s;
 }
-.forgettext:hover{
+
+.forgettext:hover {
     color: #7f6727;
 }
 
@@ -231,3 +234,90 @@
         /* Add some space between buttons */
     }
 }
+
+@media only screen and (max-width: 450px) {
+    .container {
+        width: 100%;
+    }
+
+    .section {
+        width: 80%;
+        padding: 40px 30px;
+        margin: 30px auto;
+    }
+
+    .header {
+        font-size: 28px;
+    }
+
+    .input,
+    .forgettext {
+        font-size: 14px;
+    }
+
+    .fancy {
+        padding: 1em 1.5em;
+        font-size: 12px;
+    }
+
+    .fancy .text {
+        font-size: 1em;
+        padding-left: 1.2em;
+    }
+
+    .containerbtns {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .fancy::before {
+        content: " ";
+        width: 1rem;
+        height: 2px;
+        background: black;
+        top: 50%;
+        left: 1em;
+        position: absolute;
+        transform: translateY(-50%);
+        transform-origin: center;
+        transition: background 0.3s linear, width 0.3s linear;
+
+    }
+
+    .signupbtn {
+        --b: 3px;
+        /* border thickness */
+        --s: .45em;
+        /* size of the corner */
+        --color: #e2e2e2;
+        font-weight: bold;
+        /* padding: calc(.2em + var(--s)) calc(.9em + var(--s)); */
+        padding: 10px px;
+        color: var(--color);
+        --_p: var(--s);
+        background: conic-gradient(from 90deg at var(--b) var(--b), #0000 90deg, var(--color) 0) var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+        transition: .3s linear, color 0s, background-color 0s;
+        outline: var(--b) solid #0000;
+        outline-offset: .6em;
+        font-size: 16px;
+        border: 0;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+}
+
+/* Specific adjustments for elements */
+/* .containerbtns {
+    padding: 20px 0px;
+}
+
+.forget {
+    text-align: center;
+}
+
+.signupbtn {
+    padding: 8px 25px;
+    font-size: 14px;
+} */

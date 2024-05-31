@@ -15,6 +15,9 @@ export function LogIn() {
   const navigate = useNavigate();
   const { setToken } = useContext(authContext);
 
+  useEffect(() => {
+    document.title = "Helwan Printing Press | Log In";
+  }, []);
   async function sendingData(values) {
     setIsLoading(true);
     try {
@@ -25,7 +28,7 @@ export function LogIn() {
       // console.log(data);
       //http://localhost:4000/auth/login
       // https://printing-sys-fojo.vercel.app/auth/register
-      const res =jwtDecode(data.token);
+      const res = jwtDecode(data.token);
       console.log(res.role);
       if (res.role === "user") {
         localStorage.setItem("tkn", data.token);
@@ -35,7 +38,7 @@ export function LogIn() {
           navigate("/");
         }, 3000);
       }
-      if(res.role === "admin"){
+      if (res.role === "admin") {
         setErorrMsg("YOU ARE NOT AUTHORIZED");
       }
     } catch (error) {

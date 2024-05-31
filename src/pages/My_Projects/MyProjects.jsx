@@ -15,6 +15,9 @@ function MyProjects() {
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);
+  useEffect(() => {
+    document.title = "Helwan Printing Press | My Projects";
+  }, []);
   return (
     <div>
       <ScrollToTop

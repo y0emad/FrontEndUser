@@ -15,7 +15,9 @@ import { UpSquareOutlined } from "@ant-design/icons";
 export function About() {
   const [t, i18n] = useTranslation("global");
   const [lang, setLang] = useLocalStorage("lang", "ar");
-
+  useEffect(() => {
+    document.title = "Helwan Printing Press | About Us";
+  }, []);
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);

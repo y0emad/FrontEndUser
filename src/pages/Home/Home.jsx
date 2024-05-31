@@ -18,6 +18,9 @@ function Home() {
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);
+  useEffect(() => {
+    document.title = "Helwan Printing Press";
+  }, []);
   return (
     <div>
       <ScrollToTop

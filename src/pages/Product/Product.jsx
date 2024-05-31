@@ -37,6 +37,9 @@ function Product() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  useEffect(() => {
+    document.title = `Helwan Printing Press | ${product.data.name}`;
+  }, []);
 
   function errorMsg() {
     toast.error("YOU MUST LOGIN FIRST😒 ", {

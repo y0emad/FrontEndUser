@@ -5,7 +5,7 @@ import axios from "axios";
 import * as Yup from "yup";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { ThreeCircles } from "react-loader-spinner";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../Context/authentication";
 import { jwtDecode } from "jwt-decode";
 export function LogIn() {

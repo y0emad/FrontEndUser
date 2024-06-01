@@ -4,7 +4,7 @@ import axios from "axios";
 import * as Yup from "yup";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { ThreeCircles } from "react-loader-spinner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 
 export default function ResetPassword() {
@@ -67,138 +67,47 @@ export default function ResetPassword() {
     },
     onSubmit: sendingData,
   });
-  return (
-    <div className="">
-      <div className={Reset.section}>
-        {errorMeg ? (
-          <div
-            className={
-              Reset.alert +
-              " text-red-200 shadow-inner rounded p-3 bg-red-300 mt-2 text-center"
-            }
-          >
-            {errorMeg}
-          </div>
-        ) : (
-          ""
-        )}
-        {successMsg ? (
-          <div
-            className={
-              Reset.alert +
-              " text-red-200 shadow-inner rounded p-3 bg-green-300 mt-2 text-center"
-            }
-          >
-            {successMsg}
-          </div>
-        ) : (
-          ""
-        )}
-        <h2 className={Reset.header}>Reset Password</h2>
-        <form onSubmit={formikObj.handleSubmit}>
-          <input
-            type="email"
-            onChange={formikObj.handleChange}
-            onBlur={formikObj.handleBlur}
-            value={formikObj.values.email}
-            name="email"
-            style={{ fontFamily: " Segoe UI ,fontawesome  " }}
-            className={
-              Reset.input +
-              " mt-5 border w-full text-base px-2 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
-            }
-            placeholder=" &#xf0e0; E-mail"
-          />
-          {formikObj.errors.email && formikObj.touched.email ? (
-            <div
-              className={
-                Reset.alert +
-                " text-red-200 shadow-inner rounded p-3 bg-red-300 mt-2 "
-              }
-            >
-              {formikObj.errors.email}
-            </div>
-          ) : (
-            ""
-          )}
+  return <div className="">
+    <div className={Reset.section}>
+      {errorMeg ? <div className={Reset.alert + ' text-red-200 shadow-inner rounded p-3 bg-red-300 mt-2 text-center'}>{errorMeg}</div> : ""}
+      {successMsg ? <div className={Reset.alert + ' text-red-200 shadow-inner rounded p-3 bg-green-300 mt-2 text-center'}>{successMsg}</div> : ""}
+      <h2 className={Reset.header}>Reset Password</h2>
+      <form onSubmit={formikObj.handleSubmit}>
 
-          <input
-            type="text"
-            onChange={formikObj.handleChange}
-            onBlur={formikObj.handleBlur}
-            value={formikObj.values.resetCode}
-            name="resetCode"
-            style={{ fontFamily: " Segoe UI ,fontawesome  " }}
-            className={
-              Reset.input +
-              " mt-5 border w-full text-base px-2 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
-            }
-            placeholder=" &#xf023; Code"
-          />
-          {formikObj.errors.resetCode && formikObj.touched.resetCode ? (
-            <div
-              className={
-                Reset.alert +
-                " text-red-200 shadow-inner rounded p-3 bg-red-300 mt-2 "
-              }
-            >
-              {formikObj.errors.resetCode}
-            </div>
-          ) : (
-            ""
-          )}
 
-          <input
-            type="password"
-            onChange={formikObj.handleChange}
-            onBlur={formikObj.handleBlur}
-            value={formikObj.values.newPassword}
-            name="newPassword"
-            style={{ fontFamily: " Segoe UI ,fontawesome  " }}
-            className={
-              Reset.input +
-              " mt-5 border w-full text-base px-2 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
-            }
-            placeholder=" &#xf023; Password"
-          />
-          {formikObj.errors.newPassword && formikObj.touched.newPassword ? (
-            <div
-              className={
-                Reset.alert +
-                " text-red-200 shadow-inner rounded p-3 bg-red-300 mt-2 "
-              }
-            >
-              {formikObj.errors.newPassword}
-            </div>
-          ) : (
-            ""
-          )}
 
-          <div className={Reset.containerbtns}>
-            <button
-              className={Reset.signupbtn}
-              type="submit"
-              disabled={
-                formikObj.isValid === false || formikObj.dirty === false
-              }
-            >
-              {isLoading ? (
-                <ThreeCircles
-                  visible={true}
-                  height="30"
-                  width="60"
-                  color="#fff"
-                  ariaLabel="three-circles-loading"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                />
-              ) : (
-                "Submit"
-              )}
-            </button>
-          </div>
-        </form>
-      </div>
+
+        <input type="email" onChange={formikObj.handleChange} onBlur={formikObj.handleBlur} value={formikObj.values.email} name='email' className={Reset.input + ' mt-5 border w-full text-base ps-8 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 '} placeholder='  E-mail' />
+        <i className="fa-solid fa-envelope relative	 " style={{ color: "#7f6727", bottom: "33px", left: "10px" }}></i>
+        {(formikObj.errors.email && formikObj.touched.email) ? <div className={Reset.alert + ' text-red-200 shadow-inner rounded p-3 bg-red-300  '}>{formikObj.errors.email}</div> : ""}
+
+        <input type="text" onChange={formikObj.handleChange} onBlur={formikObj.handleBlur} value={formikObj.values.resetCode} name='resetCode' className={Reset.input + ' mt-5 border w-full text-base ps-8 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 '} placeholder='  Code' />
+        <i className="fa-solid fa-lock relative	" style={{ color: "#7f6727", bottom: "33px", left: "10px" }}></i>
+        {(formikObj.errors.resetCode && formikObj.touched.resetCode) ? <div className={Reset.alert + ' text-red-200 shadow-inner rounded p-3 bg-red-300  '}>{formikObj.errors.resetCode}</div> : ""}
+
+        <input type="password" onChange={formikObj.handleChange} onBlur={formikObj.handleBlur} value={formikObj.values.newPassword} name='newPassword' className={Reset.input + ' mt-5 border w-full text-base ps-8 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 '} placeholder='  Password' />
+        <i className="fa-solid fa-lock relative	 " style={{ color: "#7f6727", bottom: "33px", left: "10px" }}></i>
+        {(formikObj.errors.newPassword && formikObj.touched.newPassword) ? <div className={Reset.alert + ' text-red-200 shadow-inner rounded p-3 bg-red-300  '}>{formikObj.errors.newPassword}</div> : ""}
+
+
+
+
+
+        <div className={Reset.containerbtns}>
+          <button className={Reset.signupbtn} type='submit' disabled={formikObj.isValid === false || formikObj.dirty === false}>
+            {isLoading ? <ThreeCircles
+              visible={true}
+              height="30"
+              width="60"
+              color="#fff"
+              ariaLabel="three-circles-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            /> : "Submit"}
+          </button>
+
+        </div>
+      </form>
     </div>
-  );
+  </div>
 }

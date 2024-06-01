@@ -5,6 +5,7 @@ import { Loading } from "../pages/Loading/Loading";
 import { FooterMain } from "../components/FooterMain";
 import { calc } from "antd/es/theme/internal";
 import { Toaster } from "react-hot-toast";
+import { Offline } from "react-detect-offline";
 
 
 export function LayoutMain() {
@@ -28,7 +29,7 @@ export function LayoutMain() {
           </div>
           <div style={{ paddingTop: "4rem" }}>
             <FooterMain />
-            <Toaster/>
+            <Toaster />
           </div>
         </>
       )}

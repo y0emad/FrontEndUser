@@ -115,13 +115,13 @@ export default function Registeration() {
           name="username"
           className={
             SignUp.input +
-            " mt-5 border w-full text-base ps-8 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
+            " mt-5 border w-full text-base ps-8 py-2 px-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
           }
           placeholder={t("SignUp.Username")}
         />
         <i
-          className="fa-solid fa-user relative "
-          style={{ color: "#7f6727", bottom: "33px", left: "10px" }}
+          className="fa-solid fa-user relative ltr:left-[10px] px-1 rtl:right-[10px] "
+          style={{ color: "#7f6727", bottom: "33px" }}
         ></i>
         {formikObj.errors.username && formikObj.touched.username ? (
           <div
@@ -144,13 +144,13 @@ export default function Registeration() {
           name="email"
           className={
             SignUp.input +
-            " mt-5 border w-full text-base ps-8 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
+            " mt-5 border w-full text-base ps-8 py-2 px-2  focus:outline-5 focus:ring-3 focus:border-white-600 "
           }
           placeholder={t("Login.Email")}
         />
         <i
-          className="fa-solid fa-envelope relative "
-          style={{ color: "#7f6727", bottom: "33px", left: "10px" }}
+          className="fa-solid fa-envelope relative ltr:left-[10px] px-1 rtl:right-[10px] "
+          style={{ color: "#7f6727", bottom: "33px" }}
         ></i>
         {formikObj.errors.email && formikObj.touched.email ? (
           <div
@@ -173,13 +173,13 @@ export default function Registeration() {
           name="password"
           className={
             SignUp.input +
-            " mt-5 border w-full text-base ps-8 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
+            " mt-5 border w-full text-base ps-8 py-2 px-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
           }
           placeholder={t("Login.Password")}
         />
         <i
-          className="fa-solid fa-lock relative "
-          style={{ color: "#7f6727", bottom: "33px", left: "10px" }}
+          className="fa-solid fa-lock relative ltr:left-[10px] px-1 rtl:right-[10px] "
+          style={{ color: "#7f6727", bottom: "33px" }}
         ></i>
         {formikObj.errors.password && formikObj.touched.password ? (
           <div
@@ -201,14 +201,14 @@ export default function Registeration() {
           value={formikObj.values.passwordConfirm}
           className={
             SignUp.input +
-            " mt-5 border w-full text-base ps-8 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
+            " mt-5 border w-full text-base ps-8 py-2 px-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
           }
           name="passwordConfirm"
           placeholder={t("SignUp.RePassword")}
         />
         <i
-          className="fa-solid fa-lock relative "
-          style={{ color: "#7f6727", bottom: "33px", left: "10px" }}
+          className="fa-solid fa-lock relative ltr:left-[10px] px-1 rtl:right-[10px] "
+          style={{ color: "#7f6727", bottom: "33px" }}
         ></i>
         {formikObj.errors.passwordConfirm &&
         formikObj.touched.passwordConfirm ? (
@@ -232,13 +232,13 @@ export default function Registeration() {
           name="phoneNumber"
           className={
             SignUp.input +
-            " mt-5 border w-full text-base ps-8 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
+            " mt-5 border w-full text-base ps-8 py-2 focus:outline-5 px-2 focus:ring-3 focus:border-white-600 "
           }
           placeholder={t("SignUp.Phonenumber")}
         />
         <i
-          className="fa-solid fa-phone relative "
-          style={{ color: "#7f6727", bottom: "33px", left: "10px" }}
+          className="fa-solid fa-phone relative ltr:left-[10px] px-1 rtl:right-[10px] "
+          style={{ color: "#7f6727", bottom: "33px" }}
         ></i>
         {formikObj.errors.phoneNumber && formikObj.touched.phoneNumber ? (
           <div

@@ -97,13 +97,13 @@ export default function VerifyEmail() {
             name="code"
             className={
               Verify.input +
-              " mt-5 border w-full text-base ps-8 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
+              " mt-5 border w-full text-base ps-8 py-2 px-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
             }
             placeholder={t("SignUp.Code")}
           />
           <i
-            className="fa-solid fa-lock relative	 "
-            style={{ color: "#7f6727", bottom: "33px", left: "10px" }}
+            className="fa-solid fa-lock relative ltr:left-[10px] px-1 rtl:right-[10px]	 "
+            style={{ color: "#7f6727", bottom: "33px" }}
           ></i>
           {formikObj.errors.code && formikObj.touched.code ? (
             <div

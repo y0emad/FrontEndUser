@@ -69,7 +69,7 @@ function Home() {
         <div className=" flex justify-evenly  flex-wrap mr-5 ml-5 gap-10 ">
           {all_products.message === "No Products found" ? (
             <div className=" text-gray-200 text-2xl font-medium ">
-              {all_products.message}
+              {t("Home.NoProductsfound")}
             </div>
           ) : (
             all_products.data.map((product) => (

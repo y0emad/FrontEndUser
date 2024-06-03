@@ -8,16 +8,22 @@ import { ThreeCircles } from "react-loader-spinner";
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../Context/authentication";
 import { jwtDecode } from "jwt-decode";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import { useTranslation } from "react-i18next";
 export function LogIn() {
   const [errorMeg, setErorrMsg] = useState(null);
   const [successMsg, setSuccessMsg] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { setToken } = useContext(authContext);
-
+  const [t, i18n] = useTranslation("global");
+  const [lang, setLang] = useLocalStorage("lang", "ar");
   useEffect(() => {
     document.title = "Helwan Printing Press | Log In";
   }, []);
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [lang]);
   async function sendingData(values) {
     setIsLoading(true);
     try {
@@ -71,7 +77,7 @@ export function LogIn() {
               " text-red-200 shadow-inner rounded p-3 bg-red-300 mt-2 text-center"
             }
           >
-            {errorMeg}
+            {t("SignUp.InvalidEmailOrPassword")}
           </div>
         ) : (
           ""
@@ -83,12 +89,12 @@ export function LogIn() {
               " text-red-200 shadow-inner rounded p-3 bg-green-300 mt-2 text-center"
             }
           >
-            {successMsg}
+            {t("SignUp.Loginsuccessfully")}
           </div>
         ) : (
           ""
         )}
-        <h2 className={LOGIN.header}>Login</h2>
+        <h2 className={LOGIN.header}>{t("Login.Login")}</h2>
         <form onSubmit={formikObj.handleSubmit}>
           <input
             type="email"
@@ -96,14 +102,16 @@ export function LogIn() {
             onBlur={formikObj.handleBlur}
             value={formikObj.values.email}
             name="email"
-
             className={
               LOGIN.input +
               " mt-5 border w-full text-base ps-7 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
             }
-            placeholder="  E-mail"
+            placeholder={t("Login.Email")}
           />
-          <i className="fa-solid fa-envelope relative " style={{ color: "#7f6727", bottom: "33px", left: "10px" }}></i>
+          <i
+            className="fa-solid fa-envelope relative "
+            style={{ color: "#7f6727", bottom: "33px", left: "10px" }}
+          ></i>
           {formikObj.errors.email && formikObj.touched.email ? (
             <div
               className={
@@ -123,14 +131,16 @@ export function LogIn() {
             onBlur={formikObj.handleBlur}
             value={formikObj.values.password}
             name="password"
-
             className={
               LOGIN.input +
               " mt-5 border w-full text-base ps-7 py-2 focus:outline-5 focus:ring-3 focus:border-white-600 "
             }
-            placeholder="  Password"
+            placeholder={t("Login.Password")}
           />
-          <i className="fa-solid fa-lock relative " style={{ color: "#7f6727", bottom: "33px", left: "10px" }}></i>
+          <i
+            className="fa-solid fa-lock relative "
+            style={{ color: "#7f6727", bottom: "33px", left: "10px" }}
+          ></i>
           {formikObj.errors.password && formikObj.touched.password ? (
             <div
               className={
@@ -163,20 +173,20 @@ export function LogIn() {
                   wrapperClass=""
                 />
               ) : (
-                "Login"
+                t("Login.Login")
               )}
             </button>
 
             <Link className={LOGIN.fancy} to={"/Registeration"}>
               <span className={LOGIN.topKey}></span>
-              <span className={LOGIN.text}>Sign up</span>
+              <span className={LOGIN.text}>{t("Login.Signup")}</span>
               <span className={LOGIN.bottomKey1}></span>
               <span className={LOGIN.bottomKey2}></span>
             </Link>
           </div>
           <div className={LOGIN.forget}>
             <Link to={"/ForgetPassword"} className={LOGIN.forgettext}>
-              Forget Password?
+              {t("Login.ForgetPassword")}
             </Link>
           </div>
         </form>

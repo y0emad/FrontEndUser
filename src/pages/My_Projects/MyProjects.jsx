@@ -35,7 +35,7 @@ function MyProjects() {
       />{" "}
       {my_projects.message === "No orders found for this user." ? (
         <div className=" title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-gray-200 pt-10">
-          {my_projects.message}
+          {t("ModalMyPro.Noordersfound")}
         </div>
       ) : (
         <section className="py-24 relative">
@@ -55,7 +55,7 @@ function MyProjects() {
                   {t("ModalMyPro.Status")}
                 </span>
                 <span className="w-full max-w-[176px] text-center ">
-                  Messages{" "}
+                  {t("ModalMyPro.Messages")}{" "}
                 </span>
               </p>
             </div>

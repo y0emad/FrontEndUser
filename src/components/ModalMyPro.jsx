@@ -8,6 +8,7 @@ import {
   CheckCircleFilled,
   ClockCircleFilled,
   CloseCircleFilled,
+  EditOutlined,
   LoadingOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -149,7 +150,7 @@ export default function ModalMyPro(order, { state }) {
                 <div className=" w-full flex flex-wrap gap-2 items-start ">
                   {" "}
                   <h1 className="text-2xl font-medium text-[#ad8d36]">
-                    Order Id :
+                    {t("ModalMyPro.OrderId")} :
                   </h1>{" "}
                   <h1 className=" text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
                     {order._id}
@@ -174,7 +175,7 @@ export default function ModalMyPro(order, { state }) {
                   </h1>
                 </div>
                 <h1 className="text-2xl font-medium text-gray-200 w-full my-4 ">
-                  Required Data
+                  {t("ModalMyPro.RequiredData")}
                 </h1>{" "}
                 {order.product.data?.map((field) => (
                   <div key={field._id} className=" space-y-3">
@@ -192,6 +193,19 @@ export default function ModalMyPro(order, { state }) {
                   </div>
                 ))}
               </div>
+            )}
+            {!order.accepted && (
+              <h6 className="text-gray-200 mt-5  font-manrope   font-bold text-2xl leading-9 w-full max-w-[176px] text-center">
+                <Link
+                  to={`/MyProjects/edit/${order._id}`}
+                  className=" bg-[#7f6727]  border-2 px-5 py-2 hover:bg-transparent duration-500 cursor-pointer  text-nowrap border-gray-200"
+                >
+                  <span className="font-bold text-gray-200 text-xl mx-2 ">
+                    {t("ModalMyPro.edit")}
+                  </span>
+                  <EditOutlined className=" text-lg" />
+                </Link>
+              </h6>
             )}
           </Modal>
 
@@ -264,7 +278,7 @@ export default function ModalMyPro(order, { state }) {
                       <div className=" w-full flex flex-wrap gap-2 items-center ">
                         {" "}
                         <h1 className="text-2xl font-medium text-[#ad8d36]">
-                          Total Cost :
+                          {t("ModalMyPro.TotalCost")} :
                         </h1>{" "}
                         <h1 className=" text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
                           {invoice?.totalCost}
@@ -273,7 +287,7 @@ export default function ModalMyPro(order, { state }) {
                       <div className=" w-full flex flex-wrap gap-2 items-center ">
                         {" "}
                         <h1 className="text-2xl font-medium text-[#ad8d36]">
-                          Payment Code :
+                          {t("ModalMyPro.PaymentCode")} :
                         </h1>{" "}
                         <h1 className=" text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
                           {invoice?.paymentCode}
@@ -282,7 +296,7 @@ export default function ModalMyPro(order, { state }) {
                       <div className=" w-full flex flex-wrap gap-2 items-center ">
                         {" "}
                         <h1 className="text-2xl font-medium text-[#ad8d36]">
-                          Delivery Time :
+                          {t("ModalMyPro.DeliveryTime")} :
                         </h1>{" "}
                         <h1 className=" text-xl text-gray-200  min-w-[80px]  max-w-[72%]">
                           {dateOnly}
@@ -330,7 +344,7 @@ export default function ModalMyPro(order, { state }) {
               className="cursor-pointer relative group overflow-hidden border-2 px-8 py-2 border-[#7f6727] "
             >
               <span className="font-bold text-[#000915] text-xl relative z-10 group-hover:text-gray-200 duration-500">
-                Messages
+                {t("ModalMyPro.Messages")}
               </span>
               <span className="absolute top-0 left-0 w-full bg-[#7f6727] duration-500 group-hover:-translate-x-full h-full"></span>
               <span className="absolute top-0 left-0 w-full bg-[#7f6727] duration-500 group-hover:translate-x-full h-full"></span>
@@ -340,7 +354,7 @@ export default function ModalMyPro(order, { state }) {
             </button>
           </h6>
           <Modal
-            title="Messages"
+            title={t("ModalMyPro.Messages")}
             open={isMsgOpen}
             onOk={() => handleOk("Messages")}
             key="Messages"
@@ -374,7 +388,9 @@ export default function ModalMyPro(order, { state }) {
                     </div>
                   ))
                 ) : (
-                  <p className=" font-bold text-xl">No Messages</p>
+                  <p className=" font-bold text-xl">
+                    {t("ModalMyPro.NoMessages")}
+                  </p>
                 )}
               </div>
             )}

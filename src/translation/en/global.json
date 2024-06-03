@@ -5,7 +5,7 @@
     "Services": "Services",
     "My_projects": "My projects",
     "Log_in": "Log in",
-    "Log_out":"Log Out"
+    "Log_out": "Log Out"
   },
   "footer": {
     "copyright": "all rights reserved © the electronic portal of the scientific calculation Center 2024"
@@ -20,7 +20,8 @@
     "iIP": "Innovation in print.",
     "content": "The site provides all kinds of printing, printing books, posters, paper, personal cards and catalogs",
     "Know_More": "Know More",
-    "all_products": "All Products"
+    "all_products": "All Products",
+    "NoProductsfound": "No Products found"
   },
   "About": {
     "header": "Print everything you want from here easily ",
@@ -37,9 +38,12 @@
     "Make_Order": "Make an Order",
     "Quantity": "Quantity",
     "Upload_file": "Upload file",
+    "Update_file": "Update file",
     "Send": "Send",
     "Sending": "Sending...",
-    "Cancel": "Cancel"
+    "Cancel": "Cancel",
+    "LOGINFIRST": "YOU MUST LOGIN FIRST😒 ",
+    "Notes": "Notes"
   },
   "ModalMyPro": {
     "Product": "Product",
@@ -58,6 +62,55 @@
     "stat1": "You paid the bill for the book now will be printed.",
     "stat2": "Printed of the book is finished.",
     "stat3": "Covered of the book is finished.",
-    "stat4": "The book is ready."
+    "stat4": "The book is ready.",
+    "Noordersfound": "No orders found for you.",
+    "Messages": "Messages",
+    "OrderId": "Order Id",
+    "RequiredData": "Required Data",
+    "TotalCost": "Total Cost",
+    "PaymentCode": "Payment Code",
+    "DeliveryTime": "Delivery Time",
+    "NoMessages": "No Messages",
+    "edit": "Update The Details",
+    "Update": "Update"
+  },
+  "Login": {
+    "Email": "Email",
+    "Password": "Password",
+    "Login": "Login",
+    "Signup": "Sign up",
+    "ForgetPassword": "Forget Password"
+  },
+  "SignUp": {
+    "Must": "Name must be between 6 to 20 characters .",
+    "Nameisrequired": "Name is required",
+    "Emailshould": "E-mail should include '@' and '.' to be valid",
+    "Emailisrequired": "E-mail is required",
+    "Thephonenumber": "The phone number does not match egyption number",
+    "Phoneisrequired": "Phone is required",
+    "Passwordatleast": "Password at least containt Minimum 8 characters, at least one uppercase letter and one lowercase letter .",
+    "Passwordisrequired": "Password is required",
+    "Passwordandrepassword": "Password and repassword does not match ^_^",
+    "Repasswordisrequired": "Re-password is required",
+    "Username": "Username",
+    "RePassword": "  Re-Password",
+    "Phonenumber": "Phonenumber",
+    "Emailshouldvalid": "E-mail should include '@' to be valid",
+    "Codemust": "Code must be between 6 digits.",
+    "Codeisrequired": "Code is required",
+    "ResetPassword": "Reset Password",
+    "Code": "Code",
+    "Submit": "Submit",
+    "ForgetPassword": "Forget Password",
+    "Usernotfound": "User not found.",
+    "Passwordresetsent": "Password reset email sent. Please check your email.",
+    "Invalidcode": "Invalid verification code.",
+    "passwordsuccessfullyreset": "The password has been successfully reset",
+    "Userregisteredsuccessfully": "User registered successfully. Please check your email for verification.",
+    "Emailalready": "Email already in use.",
+    "VerifyEmail": "Verify Email",
+    "Emailverificationsuccessful": "Email verification successful",
+    "InvalidEmailOrPassword": "Invalid email or password.",
+    "Loginsuccessfully": "Login successfully"
   }
 }

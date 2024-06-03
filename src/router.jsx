@@ -11,7 +11,8 @@ import VerifyEmail from "./pages/VerifyEmail/VerifyEmail";
 import { LogIn } from "./pages/Log_in/LogIn";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
-import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
+
+import { UpdateOrderFunc } from "./pages/UpdateOrder/UpdateOrder";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +27,16 @@ export const router = createBrowserRouter([
 
       {
         path: "/MyProjects",
-        ...MyProjectsFunc,
+        children: [
+          {
+            index: true,
+            ...MyProjectsFunc,
+          },
+          {
+            path: "/MyProjects/edit/:order_id",
+            ...UpdateOrderFunc,
+          },
+        ],
       },
       { path: "/LogIn", element: <LogIn /> },
       { path: "/Registeration", element: <Registeration /> },

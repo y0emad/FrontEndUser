@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import imgBooks from "../../images/Boos.jpg";
+
 import { Modal, Spin } from "antd";
 import "./product.css";
 import { jwtDecode } from "jwt-decode";

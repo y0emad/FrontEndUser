@@ -111,5 +111,14 @@
     "Emailverificationsuccessful": "التحقق من البريد الإلكتروني ناجح",
     "InvalidEmailOrPassword": "بريد إلكتروني أو كلمة مرور غير صالحة.",
     "Loginsuccessfully": "تسجيل الدخول بنجاح"
+  },
+  "Chat": {
+    "Send": "إرسال",
+    "Message": "الرسالة",
+
+    "Msg": "الرسالة...",
+    "QuickChat": "دردشة سريعة",
+    "ActiveConversations": "المحادثات النشطة",
+    "ContactUs": "تواصل معنا"
   }
 }

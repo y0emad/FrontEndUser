@@ -5,8 +5,8 @@ import "./home.css";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useEffect } from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import { UpSquareOutlined } from "@ant-design/icons";
-import { Card } from "antd";
+import { CommentOutlined, UpSquareOutlined } from "@ant-design/icons";
+import { Card, Popover } from "antd";
 import ScrollToTop from "react-scroll-to-top";
 const { Meta } = Card;
 
@@ -22,7 +22,7 @@ function Home() {
     document.title = "Helwan Printing Press";
   }, []);
   return (
-    <div>
+    <div className=" relative">
       <ScrollToTop
         smooth
         top={400}
@@ -109,6 +109,16 @@ function Home() {
           )}
         </div>
       </div>
+
+      <Popover content={t("Chat.ContactUs")}>
+        <Link
+          to="/UserChats"
+          className=" fixed bottom-10 w-fit h-fit rounded-full text-gray-200 left-10 bg-[#000915] "
+        >
+          {" "}
+          <CommentOutlined className=" text-4xl hover:text-[#7f6727]" />
+        </Link>
+      </Popover>
     </div>
   );
 }

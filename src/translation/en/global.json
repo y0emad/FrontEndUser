@@ -112,5 +112,13 @@
     "Emailverificationsuccessful": "Email verification successful",
     "InvalidEmailOrPassword": "Invalid email or password.",
     "Loginsuccessfully": "Login successfully"
+  },
+  "Chat": {
+    "Send": "Send",
+    "Message": "Message",
+    "QuickChat": "Quick Chat",
+    "Msg": "Message...",
+    "ActiveConversations": "Active Conversations",
+    "ContactUs": "Contact Us"
   }
 }

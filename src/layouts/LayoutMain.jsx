@@ -7,15 +7,23 @@ import { calc } from "antd/es/theme/internal";
 import { Toaster } from "react-hot-toast";
 import { Offline } from "react-detect-offline";
 
-
 export function LayoutMain() {
   const { state } = useNavigation();
-
+  const isChatPage = location.pathname === "/UserChats";
   return (
     <>
       <NavBarMain />
       {state === "loading" ? (
         <Loading />
+      ) : isChatPage ? (
+        <div
+          style={{
+            // paddingTop: "4rem",
+            minHeight: "calc(100vh - 4rem )",
+          }}
+        >
+          <Outlet />
+        </div>
       ) : (
         <>
           <ScrollRestoration />

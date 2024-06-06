@@ -14,6 +14,7 @@ import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 import { UserChatsFunc } from "./pages/Chats/UserChats";
 import { UpdateOrderFunc } from "./pages/UpdateOrder/UpdateOrder";
+import { NotificationFunc } from "./pages/Notification/Notification";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,11 @@ export const router = createBrowserRouter([
       {
         path: "/UserChats",
         ...UserChatsFunc,
+      },
+
+      {
+        path: "/Notification",
+        ...NotificationFunc,
       },
     ],
   },

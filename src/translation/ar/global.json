@@ -120,5 +120,10 @@
     "QuickChat": "دردشة سريعة",
     "ActiveConversations": "المحادثات النشطة",
     "ContactUs": "تواصل معنا"
+  },
+  "Notification": {
+    "NoNotification": "لا يوجد إخطارات",
+    "MoreNotifications": "المزيد من الإخطارات",
+    "Notifications": "الإخطارات"
   }
 }

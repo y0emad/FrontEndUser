@@ -120,5 +120,10 @@
     "Msg": "Message...",
     "ActiveConversations": "Active Conversations",
     "ContactUs": "Contact Us"
+  },
+  "Notification": {
+    "NoNotification": "No Notifications",
+    "MoreNotifications": "More Notifications",
+    "Notifications": "Notifications"
   }
 }

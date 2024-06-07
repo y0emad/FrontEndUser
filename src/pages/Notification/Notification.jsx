@@ -19,7 +19,7 @@ export function Notification() {
   return (
     <div className="w-full h-full " id="chec-div">
       <div className="w-full  h-full ">
-        <div className="2xl:w-4/12 h-screen overflow-y-auto p-8  ">
+        <div className="2xl:w-4/12 h-screen overflow-y-auto p-8 scrollbar-hide ">
           <div className="flex items-center justify-between">
             <p
               tabIndex="0"

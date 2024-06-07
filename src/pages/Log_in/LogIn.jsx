@@ -35,7 +35,7 @@ export function LogIn() {
       //http://localhost:4000/auth/login
       // https://printing-sys-fojo.vercel.app/auth/register
       const res = jwtDecode(data.token);
-      console.log(res.role);
+      // console.log(res.role);
       if (res.role === "user") {
         localStorage.setItem("tkn", data.token);
         setToken(data.token);

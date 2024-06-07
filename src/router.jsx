@@ -12,7 +12,6 @@ import { LogIn } from "./pages/Log_in/LogIn";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
-import { UserChatsFunc } from "./pages/Chats/UserChats";
 import { UpdateOrderFunc } from "./pages/UpdateOrder/UpdateOrder";
 import { NotificationFunc } from "./pages/Notification/Notification";
 
@@ -49,10 +48,6 @@ export const router = createBrowserRouter([
       {
         path: "/Product/:product_id",
         ...ProductFunc,
-      },
-      {
-        path: "/UserChats",
-        ...UserChatsFunc,
       },
 
       {

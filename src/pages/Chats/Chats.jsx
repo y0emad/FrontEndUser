@@ -122,7 +122,9 @@ export function Chats() {
 
   useEffect(() => {
     const scrollToBottom = () => {
-      chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      if (chatEndRef.current) {
+        chatEndRef.current.scrollTop = chatEndRef.current.scrollHeight;
+      }
     };
 
     scrollToBottom();
@@ -130,6 +132,7 @@ export function Chats() {
 
   const handleSendMessage = async () => {
     const trimmedMessage = newMessage.trim();
+    setShowEmojiPicker(false);
 
     if (!trimmedMessage) {
       return;
@@ -139,8 +142,8 @@ export function Chats() {
     const message = {
       senderId: tokenDecode.userId,
       receiverId: "66087b6d7b487bca77805baf",
-      content: trimmedMessage, // Use trimmedMessage here
-      timestamp: currentTime,
+      content: trimmedMessage,
+      createdAt: currentTime,
       _id: uuidv4(),
     };
 
@@ -155,7 +158,7 @@ export function Chats() {
 
   const groupMessagesByDate = (messages) => {
     return messages.reduce((groups, message) => {
-      const date = getDateOnly(message.timestamp);
+      const date = getDateOnly(message.createdAt);
       if (!groups[date]) {
         groups[date] = [];
       }
@@ -191,16 +194,17 @@ export function Chats() {
   ) : error ? (
     <div>{error}</div>
   ) : (
-    <div className="flex flex-col flex-auto h-full p-6 pb-0">
+    <div className="flex flex-col flex-auto h-full p-0 pb-0">
       <div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-[#000915] h-full p-4">
-        <div className="flex flex-col h-full overflow-x-auto mb-4">
+        <div
+          className="flex flex-col h-full overflow-x-auto mb-4 scrollbar-hide"
+          ref={chatEndRef}
+        >
           <div className="flex flex-col h-full">
             {Object.entries(groupedMessages).map(([date, messages]) => (
               <div key={date}>
                 <div className="text-center text-gray-500 text-xs my-2">
-                  <div className="inline-block  border-gray-500 md:w-[42%]  w-[20%] me-1 border-2 bg-gray-500 "></div>
                   {date}
-                  <div className="inline-block  border-gray-500 md:w-[42%] w-[20%] ms-1 border-2 bg-gray-500 "></div>
                 </div>
                 {messages?.map((message) => (
                   <div key={message._id} className="grid grid-cols-12 gap-y-2">
@@ -215,7 +219,7 @@ export function Chats() {
                             <div>{message.content}</div>
                             <div className="absolute text-nowrap text-xs bottom-0 ltr:right-0 rtl:left-0 -mb-5 mr-2 text-gray-500">
                               <span className="text-nowrap">
-                                {extractTimeFromISOString(message.timestamp)}
+                                {extractTimeFromISOString(message.createdAt)}
                               </span>
                             </div>
                           </div>
@@ -231,7 +235,7 @@ export function Chats() {
                             <div>{message.content}</div>
                             <div className="absolute text-nowrap text-xs bottom-0 ltr:right-0 rtl:left-0 -mb-5 mr-2 text-gray-500">
                               <span className="text-nowrap">
-                                {extractTimeFromISOString(message.timestamp)}
+                                {extractTimeFromISOString(message.createdAt)}
                               </span>
                             </div>
                           </div>
@@ -242,7 +246,6 @@ export function Chats() {
                 ))}
               </div>
             ))}
-            <div ref={chatEndRef} />
           </div>
         </div>
 
@@ -256,6 +259,7 @@ export function Chats() {
                 placeholder={t("Chat.Msg")}
                 type="text"
                 value={newMessage}
+                onFocus={() => setShowEmojiPicker(false)}
                 onChange={(e) => setNewMessage(e.target.value)}
                 className="flex w-full border rounded-xl focus:outline-none text-[#000915] focus:border-indigo-300 px-4 h-10"
               />
@@ -279,10 +283,17 @@ export function Chats() {
                 </svg>
               </button>
               {showEmojiPicker && (
-                <div className="absolute text-nowrap text-xs bottom-20 ltr:right-0 rtl:left-0 -mb-5 mr-2 text-gray-500">
+                <div
+                  className="absolute overflow-x-hidden scrollbar-hide text-xs bottom-16  ltr:right-0 rtl:left-0 -mb-5 mr-2 text-gray-500"
+                  style={{ height: "300px", overflowY: "auto" }}
+                >
                   <Picker
                     data={data}
                     onEmojiSelect={AddEmoji}
+                    emojiSize={18}
+                    perLine={4}
+                    emojiButtonSize={36}
+                    maxFrequentRows={0}
                     locale={lang === "en" ? "en" : "ar"}
                   />
                 </div>

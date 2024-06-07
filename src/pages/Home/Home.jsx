@@ -4,10 +4,11 @@ import "../../index.css";
 import "./home.css";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useEffect } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { CommentOutlined, UpSquareOutlined } from "@ant-design/icons";
-import { Card, Popover } from "antd";
+import { Card, Popconfirm, Popover } from "antd";
 import ScrollToTop from "react-scroll-to-top";
+import { Chats } from "../Chats/Chats";
 const { Meta } = Card;
 
 function Home() {
@@ -15,6 +16,9 @@ function Home() {
   const [lang, setLang] = useLocalStorage("lang", "ar");
   const all_products = useLoaderData();
 
+  function confirm() {
+    message.info("Click on Yes.");
+  }
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);
@@ -109,16 +113,31 @@ function Home() {
           )}
         </div>
       </div>
-
-      <Popover content={t("Chat.ContactUs")}>
-        <Link
-          to="/UserChats"
-          className=" fixed bottom-10 w-fit h-fit rounded-full text-gray-200 left-10 bg-[#000915] "
-        >
-          {" "}
-          <CommentOutlined className=" text-4xl hover:text-[#7f6727]" />
-        </Link>
-      </Popover>
+      <div className="w-fit justify-self-center p-0">
+        <div style={{ position: "relative", padding: "0px" }}>
+          <Popconfirm
+            placement="top"
+            title={
+              <div className="flex flex-col  p-0 h-[400px] w-[400px]  antialiased text-gray-200 bg-[#000915]   rounded-lg">
+                <div className="flex flex-row h-full p-0 w-full overflow-y-auto">
+                  <Chats />
+                </div>
+              </div>
+            }
+            onConfirm={confirm}
+            okText={t("Notification.MoreNotifications")}
+            cancelButtonProps={{ style: { display: "none" } }}
+            okButtonProps={{
+              style: {
+                display: "none",
+              },
+            }}
+            icon={null}
+          >
+            <CommentOutlined className="text-4xl fixed bottom-10 left-10 w-fit h-fit rounded-full text-gray-200 bg-[#000915]" />
+          </Popconfirm>
+        </div>
+      </div>
     </div>
   );
 }

@@ -27,10 +27,35 @@ export default function ModalMyPro(order, { state }) {
   useEffect(() => {
     i18n.changeLanguage(lang);
   }, [lang]);
+
+  const showModal = (key) => {
+    return key === "Details"
+      ? setIsModalOpen(true)
+      : key === "Status"
+      ? setIsStatusOpen(true)
+      : setIsMsgOpen(true);
+  };
+  const handleOk = (key) => {
+    return key === "Details"
+      ? setIsModalOpen(false)
+      : key === "Status"
+      ? setIsStatusOpen(false)
+      : setIsMsgOpen(false);
+  };
+  const handleCancel = (key) => {
+    return key === "Details"
+      ? setIsModalOpen(false)
+      : key === "Status"
+      ? setIsStatusOpen(false)
+      : setIsMsgOpen(false);
+  };
   useEffect(() => {
-    setloading(true);
+    console.log(isMsgOpen);
+    if (!isStatusOpen) return;
     const abortController = new AbortController();
     const signal = abortController.signal;
+    setloading(true);
+
     fetch(`http://localhost:4000/orders/${order._id}/invoice`, {
       signal,
       headers: { authorization: `Bearer ${token}` },
@@ -55,29 +80,7 @@ export default function ModalMyPro(order, { state }) {
     return () => {
       abortController.abort();
     };
-  }, [order._id, token]);
-
-  const showModal = (key) => {
-    return key === "Details"
-      ? setIsModalOpen(true)
-      : key === "Status"
-      ? setIsStatusOpen(true)
-      : setIsMsgOpen(true);
-  };
-  const handleOk = (key) => {
-    return key === "Details"
-      ? setIsModalOpen(false)
-      : key === "Status"
-      ? setIsStatusOpen(false)
-      : setIsMsgOpen(false);
-  };
-  const handleCancel = (key) => {
-    return key === "Details"
-      ? setIsModalOpen(false)
-      : key === "Status"
-      ? setIsStatusOpen(false)
-      : setIsMsgOpen(false);
-  };
+  }, [order._id, token, isStatusOpen]);
 
   const getDateOnly = (isoString) => {
     const date = new Date(isoString);

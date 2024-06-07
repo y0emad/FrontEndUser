@@ -26,8 +26,8 @@ function MyProjects() {
         style={{
           bottom: "16px",
           backgroundColor: "#000915",
-          width: "21px",
-          height: "21px",
+          width: "fit-content",
+          height: "fit-content",
         }}
         component={
           <UpSquareOutlined className=" text-gray-200 text-2xl  hover:text-[#7f6727]" />

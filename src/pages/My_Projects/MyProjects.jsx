@@ -59,9 +59,12 @@ function MyProjects() {
                 </span>
               </p>
             </div>
-            {my_projects.data.map((order) => (
-              <ModalMyPro key={order._id} {...order} state={state} />
-            ))}
+            {my_projects.data
+              .slice()
+              .reverse()
+              .map((order) => (
+                <ModalMyPro key={order._id} {...order} state={state} />
+              ))}
           </div>
         </section>
       )}
